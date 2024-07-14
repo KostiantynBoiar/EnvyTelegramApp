@@ -8,26 +8,35 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram import Router
+from aiogram.types import Message
+
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
+router = Router()
 
 if TOKEN is None:
     raise ValueError("No BOT_TOKEN environment variable set")
 
 dp = Dispatcher()
 
+# Define start command handler
 @dp.message(CommandStart())
-async def command_start_handler(message: Message) -> None:
-        await message.answer(f"Hello, {html.bold(message.from_user.full_name)}!")
+async def send_welcome(message: Message):
 
-@dp.message()
-async def echo_handler(message: Message) -> None:
+    # Create inline keyboard
+    button1 = InlineKeyboardButton(text="Button 1", callback_data='button1', url = "https://sparkling-nougat-ea8049.netlify.app/")
+    button2 = InlineKeyboardButton(text="Button 2", callback_data='button2')
 
-    try:
-        await message.send_copy(chat_id=message.chat.id)
-    except TypeError:
-        await message.answer("Nice try!")
+    row = [button1, button2]
+
+    rows = [row]
+    inline_kb = InlineKeyboardMarkup(inline_keyboard = rows)
+
+    await message.reply("Please choose:", reply_markup=inline_kb)
+
 
 
 async def main() -> None:
