@@ -1,11 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState, useEffect} from "react"
+import Main from './Components/Main';
+
 
 function App() {
+
+  const tele = window.Telegram.WebApp;
+  
+  useEffect(() => {
+    tele.ready();
+  })
+
   return (
-<div>
-  Hello, world!
-</div>
+    <Main></Main>
   );
 }
 
