@@ -1,4 +1,16 @@
-.container{
+.canvas{
     max-width: 390px;
     background-color: red;
+}
+.footer img{
+    width: 45px;
+    height: 45px;
+    display: block;
+    margin: auto;
+    margin: 50px;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    
 }
