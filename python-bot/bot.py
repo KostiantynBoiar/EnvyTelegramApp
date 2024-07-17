@@ -26,19 +26,16 @@ dp = Dispatcher()
 @dp.message(CommandStart())
 async def send_welcome(message: Message):
 
-    # Create inline keyboard
-    button1 = InlineKeyboardButton(text="Button 1", callback_data='button1', url = "https://sparkling-nougat-ea8049.netlify.app/")
-    button2 = InlineKeyboardButton(text="Button 2", callback_data='button2')
-
-    row = [button1, button2]
-
-    rows = [row]
-    inline_kb = InlineKeyboardMarkup(inline_keyboard = rows)
-
-    await message.reply("Please choose:", reply_markup=inline_kb)
+    await message.reply("Hello, moron!")
 
 
+async def on_startup(dp):
+    print("Bot is starting...")
 
+async def on_shutdown(dp):
+    print("Bot is shutting down...")
+
+    
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
