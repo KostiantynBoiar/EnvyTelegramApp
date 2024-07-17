@@ -3,10 +3,10 @@ import logging
 import sys
 from os import getenv
 from dotenv import load_dotenv
-from aiogram import Bot, Dispatcher, html
+from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
@@ -22,11 +22,21 @@ if TOKEN is None:
 
 dp = Dispatcher()
 
-# Define start command handler
-@dp.message(CommandStart())
-async def send_welcome(message: Message):
+@dp.message(Command("bot"))
+async def bot_web_hadler(message: Message):
+    markup = InlineKeyboardMarkup(
+        inline_keyboard = [
+            [
+                InlineKeyboardButton(
+                    text="Web App", 
+                    web_app=types.WebAppInfo(url="https://6697ad22e4e789a6b27ba75d--sparkling-nougat-ea8049.netlify.app/")
+                )
+            ]
+        ]
+    )
+    await message.reply("There you go, your app: ", reply_markup = markup)
 
-    await message.reply("Hello, moron!")
+
 
 
 async def on_startup(dp):
