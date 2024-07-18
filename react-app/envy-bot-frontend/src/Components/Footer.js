@@ -6,10 +6,10 @@ function Footer() {
     
     return(
         <div className="footer">
-        <div className="footer-img"><img src={home}/></div>
-        <div className="footer-img"><img src={listCheck}/></div>
-        <div className="footer-img"><img src={user}/></div>
-    </div>
+            <div className="footer-img"><img src={home}/></div>
+            <div className="footer-img"><img src={listCheck}/></div>
+            <div className="footer-img"><img src={user}/></div>
+        </div>
     );
 }
   
