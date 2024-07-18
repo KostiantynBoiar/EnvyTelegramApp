@@ -1,6 +1,14 @@
+html, body {
+    overflow: hidden;
+}
+.background-canvas{
+    width: 1920px;
+    height: 1080px;
+    background-color: #343C82;
+}
 .canvas{
     max-width: 360px;
-    max-height: 805px;
+    max-height: 600px;
     background-color: #343C82;
     position: fixed; 
     top: 0;          
@@ -48,4 +56,24 @@
 }
 .snake h1{
     color: #FFF;
+}
+
+.button{
+    position: relative;
+    width: 206px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 16px 16px 24px;
+    border-radius: 32px;
+    color: rgb(255, 255, 255);
+    font-family: Rubik;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-left: 50px;
+    background: rgb(54, 113, 233);
 }
