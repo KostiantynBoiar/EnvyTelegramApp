@@ -8,6 +8,7 @@ from aiogram.types import Update
 from bot import Bot, dp
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from controllers.user_controller import *
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -24,6 +25,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+app.include_router(user_controller.router, tags=['Users'], prefix='/api/v1/users')
 
 @app.post('/webhook')
 async def webhook(update: Update):
