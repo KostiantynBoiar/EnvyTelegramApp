@@ -29,7 +29,7 @@ async def bot_web_hadler(message: Message):
             [
                 InlineKeyboardButton(
                     text="Web App", 
-                    web_app=types.WebAppInfo(url="https://6697ad22e4e789a6b27ba75d--sparkling-nougat-ea8049.netlify.app/")
+                    web_app=types.WebAppInfo(url="https://669fbfa7ee2f174502603480--majestic-meerkat-b0b010.netlify.app/")
                 )
             ]
         ]
@@ -39,13 +39,7 @@ async def bot_web_hadler(message: Message):
 
 
 
-async def on_startup(dp):
-    print("Bot is starting...")
-
-async def on_shutdown(dp):
-    print("Bot is shutting down...")
-
-    
+   
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
