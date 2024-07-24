@@ -7,6 +7,7 @@ from fastapi_utils.guid_type import GUID, GUID_SERVER_DEFAULT_POSTGRESQL
 class User(Base):
     
     __tablename__ = 'users'
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True,
             server_default=GUID_SERVER_DEFAULT_POSTGRESQL)
     telegram_username = Column(String)

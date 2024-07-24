@@ -1,5 +1,9 @@
 import sys
 import os
+
+from controllers import user_controller
+from database import engine
+
 sys.path.append('../python-bot/')
 
 from fastapi import FastAPI
@@ -9,8 +13,9 @@ from bot import Bot, dp
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from controllers.user_controller import *
+from models import user_model
 
-models.Base.metadata.create_all(bind=engine)
+user_model.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

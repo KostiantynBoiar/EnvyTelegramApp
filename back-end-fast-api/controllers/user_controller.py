@@ -1,9 +1,11 @@
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
+
 from fastapi import FastAPI, APIRouter, Depends
 from sqlalchemy.orm import Session
-from models.user_model import User
+from user_model import *
 from database import get_db
-from scrappers import rozetka_scrapper
-from scrappers.rozetka_scrapper import scrapper
 
 
 app = FastAPI()
