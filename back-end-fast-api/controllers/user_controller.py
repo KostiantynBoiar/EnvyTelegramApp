@@ -15,6 +15,10 @@ router = APIRouter()
 
 @router.get('/')
 def get_users(db: Session = Depends(get_db)):
-    products = db.query(User).all()
-    print(products)
-    return {'status': 'success', 'results': len(products), 'products': products} 
+    users = db.query(User).all()
+    print(users)
+    return {'status': 'success', 'results': len(users), 'products': users}
+
+@router.post('/')
+def create_user(user: User):
+    db = get_db()

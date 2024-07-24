@@ -11,7 +11,6 @@ class UserBaseSchema(BaseModel):
     referal_link = str
     reffered_by = str
 
-
     
     class Config:
         orm_mode = True

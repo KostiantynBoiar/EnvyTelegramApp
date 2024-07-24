@@ -39,7 +39,11 @@ async def bot_web_hadler(message: Message):
 
 
 
-   
+@dp.message(CommandStart)
+async def start(message: Message):
+    await message.reply(f'Hello, {message.from_user.username}')
+
+
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
