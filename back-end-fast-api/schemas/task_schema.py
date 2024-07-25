@@ -9,6 +9,7 @@ class TaskBaseSchema(BaseModel):
     id: Optional[int] = None
     title: str
     description: Optional[str] = None
+    award: Optional[int] = None
     user_id: Optional[int] = None
 
     class Config:
