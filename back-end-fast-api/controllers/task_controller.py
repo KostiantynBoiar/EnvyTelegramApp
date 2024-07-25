@@ -5,7 +5,7 @@ from typing import List
 
 from models.task_model import Task
 from models.user_model import User
-from schemas.task_schema import TaskBaseSchema
+from schemas.task_schema import TaskBaseSchema, TaskWithUsersSchema
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,10 +19,8 @@ def create_task_for_user(user_id: int, task: TaskBaseSchema, db: Session = Depen
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Создание словаря из данных задачи, без ключа 'user_id'
     task_data = task.dict(exclude={'user_id'})
 
-    # Создание задачи, добавляя user_id явно
     db_task = Task(**task_data, user_id=user_id)
 
     db.add(db_task)
@@ -38,12 +36,14 @@ def read_tasks_for_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return db_user.tasks
 
+
 @router.get("/{task_id}", response_model=TaskBaseSchema)
 def read_task(task_id: int, db: Session = Depends(get_db)):
     db_task = db.query(Task).filter(Task.id == task_id).first()
     if db_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
     return db_task
+
 
 @router.put("/{task_id}", response_model=TaskBaseSchema)
 def update_task(task_id: int, task: TaskBaseSchema, db: Session = Depends(get_db)):
@@ -56,6 +56,7 @@ def update_task(task_id: int, task: TaskBaseSchema, db: Session = Depends(get_db
     db.refresh(db_task)
     return db_task
 
+
 @router.delete("/{task_id}", response_model=TaskBaseSchema)
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     db_task = db.query(Task).filter(Task.id == task_id).first()
@@ -64,3 +65,26 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.delete(db_task)
     db.commit()
     return db_task
+
+
+@router.post("/", response_model=TaskWithUsersSchema)
+def create_task_for_all_users(task: TaskBaseSchema, db: Session = Depends(get_db)):
+    db_users = db.query(User).all()
+    if not db_users:
+        raise HTTPException(status_code=404, detail="No users found")
+
+    created_tasks = []
+    for db_user in db_users:
+        task_data = task.dict(exclude={'user_id'})
+        db_task = Task(**task_data, user_id=db_user.id)
+        db.add(db_task)
+        db.commit()
+        db.refresh(db_task)
+        created_tasks.append(db_task)
+
+    return TaskWithUsersSchema(
+        id=created_tasks[0].id,
+        title=task.title,
+        description=task.description,
+        users=[task.user_id for task in created_tasks]
+    )

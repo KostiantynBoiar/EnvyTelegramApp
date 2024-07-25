@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy.orm import relationship
 
@@ -16,3 +16,12 @@ class TaskBaseSchema(BaseModel):
         from_attributes = True
         populate_by_name = True
 
+
+class TaskWithUsersSchema(BaseModel):
+    id: int
+    title: str
+    description: str
+    users: List[int]
+
+    class Config:
+        orm_mode = True
