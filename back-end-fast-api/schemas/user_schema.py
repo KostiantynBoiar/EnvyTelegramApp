@@ -20,6 +20,7 @@ class UserBaseSchema(BaseModel):
         populate_by_name = True
 
 class UserCreateSchema(BaseModel):
+    id: Optional[int] = None
     telegram_username: str
     count_of_coins: Optional[int] = None
     last_time_of_the_claim: Optional[str] = None

@@ -4,7 +4,6 @@ from database import Base
 from sqlalchemy import TIMESTAMP, Column, String, Boolean, Integer, ForeignKey
 
 
-
 class Task(Base):
     __tablename__ = 'tasks'
     __table_args__ = {'extend_existing': True}

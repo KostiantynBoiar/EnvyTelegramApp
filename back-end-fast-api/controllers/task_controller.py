@@ -13,7 +13,7 @@ app = FastAPI()
 router = APIRouter()
 
 
-@app.post("/users/{user_id}/tasks/", response_model=TaskBaseSchema)
+@app.post("/{user_id}/", response_model=TaskBaseSchema)
 def create_task_for_user(user_id: int, task: TaskBaseSchema, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if db_user is None:

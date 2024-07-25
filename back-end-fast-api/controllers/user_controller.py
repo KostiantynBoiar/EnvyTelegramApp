@@ -33,10 +33,10 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 @router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     db_user = User(**user.dict())
-    db.add(user)
+    db.add(db_user)
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(db_user)
+    return db_user
 
 @router.put("/{user_id}", response_model=UserBaseSchema)
 def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_db)):
