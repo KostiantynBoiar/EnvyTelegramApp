@@ -1,14 +1,14 @@
-from typing import List, Optional
-from pydantic import BaseModel
 
+from pydantic import BaseModel
+from typing import Optional
 
 class TaskBaseSchema(BaseModel):
-    id: str
+    id: Optional[int] = None
     title: str
-    description: Optional[str]
-    user_id: str
+    description: Optional[str] = None
+    user_id: Optional[int] = None
 
     class Config:
-        orm_mode = True
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
+        from_attributes = True
+        populate_by_name = True
+

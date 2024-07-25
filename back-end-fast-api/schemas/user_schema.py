@@ -1,18 +1,30 @@
-from typing import List
+from typing import Optional, List
+
 from pydantic import BaseModel
+
+from schemas.task_schema import TaskBaseSchema
 
 
 class UserBaseSchema(BaseModel):
+    id: Optional[int] = None
+    telegram_username: str
+    count_of_coins: Optional[int] = None
+    last_time_of_the_claim: Optional[str] = None
+    referal_link: Optional[str] = None
+    reffered_by: Optional[str] = None
+    tasks: List[TaskBaseSchema] = []
 
-    id = str
-    telegram_username = str
-    count_of_coins = str
-    last_time_of_the_claim = str
-    referal_link = str
-    reffered_by = str
-
-    
     class Config:
-        orm_mode = True
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
+        from_attributes = True
+        populate_by_name = True
+
+class UserCreateSchema(BaseModel):
+    telegram_username: str
+    count_of_coins: Optional[int] = None
+    last_time_of_the_claim: Optional[str] = None
+    referal_link: Optional[str] = None
+    reffered_by: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+        populate_by_name = True

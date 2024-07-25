@@ -1,7 +1,7 @@
 import sys
 import os
 
-from controllers import user_controller
+from controllers import user_controller, task_controller
 from database import engine
 
 sys.path.append('../python-bot/')
@@ -33,6 +33,8 @@ app.add_middleware(
 
 
 app.include_router(user_controller.router, tags=['Users'], prefix='/api/v1/users')
+app.include_router(task_controller.router, tags=['Tasks'], prefix='/api/v1/tasks')
+
 
 @app.post('/webhook')
 async def webhook(update: Update):
