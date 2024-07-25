@@ -1,6 +1,7 @@
 from typing import Optional, List
 
 from pydantic import BaseModel
+from sqlalchemy.orm import relationship
 
 from schemas.task_schema import TaskBaseSchema
 
@@ -12,7 +13,7 @@ class UserBaseSchema(BaseModel):
     last_time_of_the_claim: Optional[str] = None
     referal_link: Optional[str] = None
     reffered_by: Optional[str] = None
-    tasks: List[TaskBaseSchema] = []
+    tasks: Optional[List[TaskBaseSchema]] = []
 
     class Config:
         from_attributes = True

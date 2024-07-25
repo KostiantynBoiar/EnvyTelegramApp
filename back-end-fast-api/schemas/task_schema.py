@@ -2,6 +2,9 @@
 from pydantic import BaseModel
 from typing import Optional
 
+from sqlalchemy.orm import relationship
+
+
 class TaskBaseSchema(BaseModel):
     id: Optional[int] = None
     title: str

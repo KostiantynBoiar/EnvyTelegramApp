@@ -17,27 +17,28 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 router = APIRouter()
 
-@router.get("/users/", response_model=List[UserBaseSchema])
+@router.get("/", response_model=List[UserBaseSchema])
 def get_users(db: Session = Depends(get_db)):
     users = db.query(User).all()
-    return {'status': 'success', 'results': len(users), 'users': users}
+    return users  # Just return the list of users
 
-@router.get("/users/{user_id}", response_model=UserBaseSchema)
+
+@router.get("/{user_id}", response_model=UserBaseSchema)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
-@router.post("/users/", response_model=UserBaseSchema)
+@router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     db_user = User(**user.dict())
-    db.add(db_user)
+    db.add(user)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(user)
+    return user
 
-@router.put("/users/{user_id}", response_model=UserBaseSchema)
+@router.put("/{user_id}", response_model=UserBaseSchema)
 def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if not db_user:
@@ -48,7 +49,7 @@ def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_
     db.refresh(db_user)
     return db_user
 
-@router.delete("/users/{user_id}", response_model=UserBaseSchema)
+@router.delete("/{user_id}", response_model=UserBaseSchema)
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if not db_user:
