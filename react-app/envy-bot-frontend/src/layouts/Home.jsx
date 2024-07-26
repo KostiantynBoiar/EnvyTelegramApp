@@ -1,8 +1,29 @@
 import main_img from '../assets/main_img.png';
 import Btn from '../components/Btn';
+import React, { useState, useEffect } from 'react';
 
+const user_id = 1
 
 export const Home = () => {
+	
+
+	const [coins, setCoins] = useState([]);
+
+	useEffect(() => {
+		fetch(`http://localhost:8000/api/v1/users/${user_id}`, {
+		method: "GET"
+		})
+		.then((response) => response.json())
+		.then((data) => {
+		setCoins(data);
+		})
+		.catch((error) => {
+		console.log(error);
+		});
+	}, []);
+
+	console.log("User data: ", coins);
+
 	return (
 		<section className='pt-[120px] flex flex-col'>
 			<h1 className='text-[50px] font-semibold leading-[64px] text-center mb-5'>
@@ -11,7 +32,7 @@ export const Home = () => {
 			<img className='w-[286px] mx-auto mb-10' src={main_img} alt='ENVY' />
 			<div className='flex items-center gap-3 justify-center mb-8'>
 				<span className='text-[48px] leading-[61px] font-semibold '>
-					150.00
+				{coins.count_of_coins}.00
 				</span>{' '}
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
