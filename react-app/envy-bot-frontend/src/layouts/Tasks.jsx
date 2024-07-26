@@ -1,15 +1,30 @@
+import { useEffect, useState } from 'react';
 import img from '../assets/main_img.png';
 import Btn from '../components/Btn';
 import ListItem from '../components/ListItem';
 
-const tasks = [
-	{ name: 'Subscribe Telegram', plus: '10' },
-	{ name: 'Subscribe Instagram', plus: '10' },
-	{ name: 'Subscribe Youtube', plus: '10' },
-	{ name: 'Subscribe Twitter', plus: '10' },
-];
+
+const user_id = 3
 
 const Tasks = () => {
+
+	const [tasks, setTasks] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const response_tasks = useEffect(() => {
+		fetch(`http://localhost:8000/api/v1/tasks/${user_id}/tasks`, {
+			method: "GET"
+		})
+		.then((response) => response.json())
+		.then((data) => {
+			setTasks(data);
+			setLoading(false);
+		})
+		.catch((error) => console.log(error))
+	}, [])
+
+	console.log("Your tasks: ", tasks)
+
 	return (
 		<section className='pt-[118px] flex flex-col'>
 			<h2 className='text-3xl mb-4 text-center'>ENVY</h2>
@@ -19,10 +34,8 @@ const Tasks = () => {
 				{tasks.map(task => {
 					return (
 						<ListItem
-							key={task.name}
-							icon={false}
-							name={task.name}
-							plus={task.plus}
+							name={task.title}
+							plus={task.award}
 						/>
 					);
 				})}
