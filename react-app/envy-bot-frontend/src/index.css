@@ -1,13 +1,80 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'TT Firs Neue Trial Var Roman';
+	src: url('./fonts/Gilroy-Regular.woff') format('woff');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+* > *,
+::after,
+::before {
+	-webkit-font-smoothing: antialiased;
+	box-sizing: inherit;
+	font-family: inherit;
+	-webkit-tap-highlight-color: transparent;
+}
+
+input {
+	outline: none;
+}
+
+html,
+body {
+	height: 100%;
+	line-height: 1;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'TT Firs Neue Trial Var Roman', sans-serif;
+	overflow-x: hidden;
+	background: #040404;
+	color: #fff;
+}
+
+ul {
+	list-style: none;
+}
+
+.content {
+	max-width: 308px;
+	margin: 0 auto;
+	padding-bottom: 150px;
+}
+
+.wrapper {
+	max-width: 393px;
+	margin: 0 auto;
+	position: relative;
+	overflow-x: hidden;
+	background: #040404;
+	height: 100vh;
+}
+
+.nav {
+	background: rgba(4, 4, 4, 0.4);
+	box-shadow: 0px -7px 80px 0px rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(25px);
+	z-index: 20;
+}
+
+.list_item {
+	padding: 14px 20px 13px 20px;
 }
