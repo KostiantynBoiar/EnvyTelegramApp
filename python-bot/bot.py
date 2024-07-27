@@ -37,8 +37,6 @@ async def bot_web_hadler(message: Message):
     await message.reply("There you go, your app: ", reply_markup = markup)
 
 
-
-
 @dp.message(CommandStart)
 async def start(message: Message):
     await message.reply(f'Hello, {message.from_user.username}')
