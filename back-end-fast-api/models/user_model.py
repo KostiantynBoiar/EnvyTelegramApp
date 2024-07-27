@@ -2,7 +2,6 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 from sqlalchemy import TIMESTAMP, Column, String, Boolean, Integer
-from fastapi_utils.guid_type import GUID, GUID_SERVER_DEFAULT_POSTGRESQL
 
 
 class User(Base):

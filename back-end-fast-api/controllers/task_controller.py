@@ -29,7 +29,7 @@ def create_task_for_user(user_id: int, task: TaskBaseSchema, db: Session = Depen
     return db_task
 
 
-@router.get("/users/{user_id}/tasks/", response_model=List[TaskBaseSchema])
+@router.get("/{user_id}/tasks/", response_model=List[TaskBaseSchema])
 def read_tasks_for_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if db_user is None:

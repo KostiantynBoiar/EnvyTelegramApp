@@ -9,7 +9,6 @@ from schemas.user_schema import UserBaseSchema, UserCreateSchema
 sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 
 from models.user_model import User
-from models.task_model import Task
 from database import get_db, Base, engine
 
 Base.metadata.create_all(bind=engine)
@@ -17,10 +16,12 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 router = APIRouter()
 
+
 @router.get("/", response_model=List[UserBaseSchema])
 def get_users(db: Session = Depends(get_db)):
     users = db.query(User).all()
     return users  # Just return the list of users
+
 
 
 @router.get("/{user_id}", response_model=UserBaseSchema)
@@ -30,6 +31,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
+
 @router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     db_user = User(**user.dict())
@@ -37,6 +39,7 @@ def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
     return db_user
+
 
 @router.put("/{user_id}", response_model=UserBaseSchema)
 def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_db)):
@@ -49,6 +52,7 @@ def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_
     db.refresh(db_user)
     return db_user
 
+
 @router.delete("/{user_id}", response_model=UserBaseSchema)
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
@@ -58,5 +62,4 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.commit()
     return db_user
 
-# Присоединяем маршруты к приложению
 app.include_router(router)
