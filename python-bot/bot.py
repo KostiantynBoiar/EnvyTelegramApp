@@ -10,8 +10,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
-from aiogram.types import Message
-
+from utils.api_requests import *
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
@@ -39,6 +38,7 @@ async def bot_web_hadler(message: Message):
 
 @dp.message(CommandStart)
 async def start(message: Message):
+    request = create_user(message.from_user.username)
     await message.reply(f'Hello, {message.from_user.username}')
 
 
