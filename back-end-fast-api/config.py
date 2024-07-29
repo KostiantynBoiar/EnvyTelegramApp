@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     POSTGRES_HOST: str
     POSTGRES_HOSTNAME: str
-
+    SCHEMATOGO_URL: str
     class Config:
         env_file = './.env'
 

@@ -4,17 +4,14 @@ from sqlalchemy.orm import sessionmaker
 from config import settings
 
 # Set up the connection string
-POSTGRES_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_HOSTNAME}:{settings.DATABASE_PORT}/{settings.POSTGRES_DB}"
+POSTGRES_URL = f"{settings.SCHEMATOGO_URL}"
 
 # Create the SQLAlchemy engine
 engine = create_engine(
-    POSTGRES_URL, echo=True
+    POSTGRES_URL
 )
 
 
-with engine.connect() as conn:
-    result = conn.execute(text(f"SELECT * FROM users;"))
-        
 
 # Set up session and base
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
