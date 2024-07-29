@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from config import settings
 
 # Set up the connection string
-#POSTGRES_URL = f"{settings.SCHEMATOGO_URL}"
-POSTGRES_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_HOSTNAME}:{settings.DATABASE_PORT}/{settings.POSTGRES_DB}"
+POSTGRES_URL = f"{settings.SCHEMATOGO_URL}"
+#POSTGRES_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_HOSTNAME}:{settings.DATABASE_PORT}/{settings.POSTGRES_DB}"
 
 
 # Create the SQLAlchemy engine

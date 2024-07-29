@@ -12,7 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 from models.user_model import User
 from database import get_db, Base, engine
 
-
+#Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
