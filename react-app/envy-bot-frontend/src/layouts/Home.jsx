@@ -1,15 +1,19 @@
 import main_img from '../assets/main_img.png';
 import Btn from '../components/Btn';
 import React, { useState, useEffect } from 'react';
+import getUserId from '../utils/getUserId.jsx';
 
-const user_id = 1
 
 export const Home = () => {
 	
-
 	const [coins, setCoins] = useState([]);
-
+	const [userId, setUserId] = useState(null);
+	let tg = window.Telegram.WebApp;
+	
 	useEffect(() => {
+		const user_id = getUserId("koreechdhs")
+		setUserId(user_id)
+		print(user_id)
 		fetch(`http://localhost:8000/api/v1/users/${user_id}`, {
 		method: "GET"
 		})

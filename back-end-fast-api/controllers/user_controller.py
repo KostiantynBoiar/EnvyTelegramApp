@@ -36,6 +36,10 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(User.telegram_username == user.telegram_username).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User with this telegram_username already exists")
+
     db_user = User(**user.dict())
     db.add(db_user)
     db.commit()
