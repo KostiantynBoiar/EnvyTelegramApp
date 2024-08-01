@@ -39,8 +39,11 @@ async def bot_web_hadler(message: Message):
 @dp.message(CommandStart)
 async def start(message: Message):
     request = create_user(message.from_user.username)
+    if request == 500:
+        await message.reply(f"Hi, {message.from_user.username}! Thank you for visiting us again")
     
-    await message.reply(f'Hello, {message.from_user.username}')
+    if request == 200: 
+        await message.reply(f'Hello, {message.from_user.username}')
 
 
 async def main() -> None:
