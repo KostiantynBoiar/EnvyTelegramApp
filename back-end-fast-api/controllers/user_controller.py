@@ -2,10 +2,10 @@ import sys
 import os
 from fastapi import FastAPI, APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from models.task_model import Task
 
-from schemas.user_schema import UserBaseSchema, UserCreateSchema
+from schemas.user_schema import UserBaseSchema, UserCreateSchema, RewardSchema
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 
@@ -105,4 +105,28 @@ def create_user_with_referral(user: UserCreateSchema, referal_link: str, db: Ses
     db.commit()
     return db_user
 
+
+@router.get("/name/{telegram_username}", response_model=Optional[int])
+def get_user_id_by_telegram_username(telegram_username: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.telegram_username == telegram_username).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user.id
+
+
+
+@router.put("/reward/{user_id}", response_model=UserBaseSchema)
+def let_reward_for_the_user(user_id: int, reward: RewardSchema, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user.count_of_coins += reward.coins
+    db.commit()
+    db.refresh(user)
+    return user
+
+
 app.include_router(router)
+
