@@ -25,7 +25,6 @@ def get_users(db: Session = Depends(get_db)):
     return users  # Just return the list of users
 
 
-
 @router.get("/{user_id}", response_model=UserBaseSchema)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
@@ -116,7 +115,6 @@ def get_user_id_by_telegram_username(telegram_username: str, db: Session = Depen
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user.id
-
 
 
 @router.put("/reward/{user_id}", response_model=UserBaseSchema)

@@ -16,5 +16,5 @@ def create_user(username: str):
         print(response.status_code)
         return 200
     else:
-        print(f"Something went wrong! Status code: {response.status_code},\n {response.json}")
+        print(f"Something went wrong! Status code: {response.status_code},\n {response}")
         return response.status_code

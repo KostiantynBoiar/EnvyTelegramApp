@@ -11,21 +11,29 @@ export const Home = () => {
 	let tg = window.Telegram.WebApp;
 	
 	useEffect(() => {
-		const user_id = getUserId("koreechdhs")
-		setUserId(user_id)
-		print(user_id)
-		fetch(`http://localhost:8000/api/v1/users/${user_id}`, {
-		method: "GET"
-		})
-		.then((response) => response.json())
-		.then((data) => {
-		setCoins(data);
-		})
-		.catch((error) => {
-		console.log(error);
-		});
+	  const fetchUserData = async () => {
+		const user_id = await getUserId(tg.initDataUnsafe.user.username);
+		//const user_id = await getUserId("koreechdhs");
+		setUserId(user_id);
+		console.log(user_id);
+  
+		if (user_id) {
+		  fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
+			method: "GET"
+		  })
+		  .then((response) => response.json())
+		  .then((data) => {
+			setCoins(data);
+		  })
+		  .catch((error) => {
+			console.log(error);
+		  });
+		}
+	  };
+	  
+	  fetchUserData();
 	}, []);
-
+  
 	console.log("User data: ", coins);
 
 	return (

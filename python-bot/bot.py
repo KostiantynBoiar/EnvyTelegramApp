@@ -28,7 +28,7 @@ async def bot_web_hadler(message: Message):
             [
                 InlineKeyboardButton(
                     text="Web App", 
-                    web_app=types.WebAppInfo(url="https://669fbfa7ee2f174502603480--majestic-meerkat-b0b010.netlify.app/")
+                    web_app=types.WebAppInfo(url="https://66abe5c0388a074db14ab2a0--sparkling-nougat-ea8049.netlify.app/")
                 )
             ]
         ]
@@ -39,7 +39,7 @@ async def bot_web_hadler(message: Message):
 @dp.message(CommandStart)
 async def start(message: Message):
     request = create_user(message.from_user.username)
-    if request == 500:
+    if request == 500 or request == 400:
         await message.reply(f"Hi, {message.from_user.username}! Thank you for visiting us again")
     
     if request == 200: 

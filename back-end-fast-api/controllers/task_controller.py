@@ -82,9 +82,11 @@ def create_task_for_all_users(task: TaskBaseSchema, db: Session = Depends(get_db
         db.refresh(db_task)
         created_tasks.append(db_task)
 
+    description = task.description if task.description is not None else ""
+
     return TaskWithUsersSchema(
         id=created_tasks[0].id,
         title=task.title,
-        description=task.description,
+        description=description,
         users=[task.user_id for task in created_tasks]
     )
