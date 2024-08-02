@@ -9,10 +9,11 @@ class TaskBaseSchema(BaseModel):
     description: Optional[str] = None
     award: Optional[int] = None
     user_id: Optional[int] = None
+    for_new_users: Optional[bool] = False
 
     class Config:
-        from_attributes = True
-        populate_by_name = True
+        orm_mode = True
+
 
 
 class TaskWithUsersSchema(BaseModel):

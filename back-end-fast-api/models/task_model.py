@@ -11,8 +11,9 @@ class Task(Base):
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     title = Column(String, nullable=False)
     description = Column(String)
-    award = Column(Integer, nullable = False)
+    award = Column(Integer, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    for_new_users = Column(Boolean, default=False)
 
-    # Relationship to User
     user = relationship('User', back_populates='tasks')
+

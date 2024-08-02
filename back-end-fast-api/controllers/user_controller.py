@@ -35,6 +35,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
+
     existing_user = db.query(User).filter(User.telegram_id == user.telegram_id).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="User with this telegram_id already exists")
@@ -44,18 +45,21 @@ def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
 
-    tasks = db.query(Task).all()
-    for task in tasks:
+    new_tasks = db.query(Task).filter_by(for_new_users=True).all()
+    for task in new_tasks:
         new_task = Task(
             title=task.title,
             description=task.description,
             award=task.award,
-            user_id=db_user.id
+            user_id=db_user.id,
+            for_new_users=False
         )
         db.add(new_task)
     db.commit()
 
     return db_user
+
+
 
 
 @router.put("/{user_id}", response_model=UserBaseSchema)

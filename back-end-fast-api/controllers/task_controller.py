@@ -29,6 +29,13 @@ def create_task_for_user(user_id: int, task: TaskBaseSchema, db: Session = Depen
     return db_task
 
 
+
+@router.get("/", response_model=List[TaskBaseSchema])
+def read_all_tasks(db: Session = Depends(get_db)):
+    tasks = db.query(Task).all()
+    return tasks
+
+
 @router.get("/{user_id}/tasks/", response_model=List[TaskBaseSchema])
 def read_tasks_for_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
@@ -90,3 +97,13 @@ def create_task_for_all_users(task: TaskBaseSchema, db: Session = Depends(get_db
         description=description,
         users=[task.user_id for task in created_tasks]
     )
+
+
+@router.post("/new_users", response_model=TaskBaseSchema)
+def create_task_for_new_users(task: TaskBaseSchema, db: Session = Depends(get_db)):
+    task_data = task.dict()
+    db_task = Task(**task_data, for_new_users=True)
+    db.add(db_task)
+    db.commit()
+    db.refresh(db_task)
+    return db_task
