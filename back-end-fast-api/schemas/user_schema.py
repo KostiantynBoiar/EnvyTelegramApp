@@ -20,7 +20,8 @@ class UserBaseSchema(BaseModel):
         populate_by_name = True
 
 class UserCreateSchema(BaseModel):
-    telegram_username: str
+    telegram_id: str
+    telegram_username: Optional[str] = None
     reffered_by: Optional[int] = None
 
     class Config:

@@ -35,9 +35,9 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=UserBaseSchema)
 def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(User.telegram_username == user.telegram_username).first()
+    existing_user = db.query(User).filter(User.telegram_id == user.telegram_id).first()
     if existing_user:
-        raise HTTPException(status_code=400, detail="User with this telegram_username already exists")
+        raise HTTPException(status_code=400, detail="User with this telegram_id already exists")
 
     db_user = User(**user.dict())
     db.add(db_user)
@@ -128,6 +128,14 @@ def let_reward_for_the_user(user_id: int, reward: RewardSchema, db: Session = De
     db.commit()
     db.refresh(user)
     return user
+
+
+@router.get("/id/{telegram_id}", response_model=Optional[int])
+def get_user_id_by_telegram_id(telegram_id: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.telegram_id == telegram_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user.id   
 
 
 app.include_router(router)
