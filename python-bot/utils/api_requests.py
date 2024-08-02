@@ -7,9 +7,9 @@ load_dotenv()
 
 URL = getenv("URL")
 
-def create_user(username: str):
+def create_user(user_id: str):
     data = {
-        'telegram_username': username
+        'telegram_id': user_id
     }
     response = requests.post(f'{URL}/api/v1/users', json=data)
     if response.status_code == 200:
