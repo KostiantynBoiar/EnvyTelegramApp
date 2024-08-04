@@ -60,8 +60,6 @@ def create_user(user: UserCreateSchema, db: Session = Depends(get_db)):
     return db_user
 
 
-
-
 @router.put("/{user_id}", response_model=UserBaseSchema)
 def update_user(user_id: int, user: UserCreateSchema, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
@@ -140,6 +138,16 @@ def get_user_id_by_telegram_id(telegram_id: str, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user.id   
+
+
+@router.get("/referrals/{user_id}", response_model=List[UserBaseSchema])
+def get_referrals_by_user_id(user_id: int, db: Session = Depends(get_db)):
+    referrer = db.query(User).filter(User.id == user_id).first()
+    if not referrer:
+        raise HTTPException(status_code=404, detail="Referrer not found")
+    
+    referrals = db.query(User).filter(User.reffered_by == user_id).all()
+    return referrals
 
 
 app.include_router(router)
