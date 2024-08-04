@@ -13,7 +13,7 @@ export const Home = () => {
 	useEffect(() => {
 	  const fetchUserData = async () => {
 		const user_id = await getUserId(tg.initDataUnsafe.user.id);
-		//const user_id = await getUserId("koreechdhs");
+		//const user_id = await getUserId("506652203");
 		setUserId(user_id);
 		console.log(user_id);
   

@@ -1,6 +1,6 @@
-const getUserId = async (username) => {
+const getUserId = async (telegram_id) => {
   try {
-    const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/name/${username}`, {
+    const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/id/${telegram_id}`, {
       method: "GET"
     });
     const data = await response.json();

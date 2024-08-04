@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-URL = getenv("URL")
+URL = getenv("API_URL")
 
 def create_user(user_id: str, username: str):
     data = {

@@ -14,7 +14,10 @@ from utils.api_requests import *
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
+URL = getenv("URL")
+
 router = Router()
+
 
 if TOKEN is None:
     raise ValueError("No BOT_TOKEN environment variable set")
@@ -28,7 +31,7 @@ async def bot_web_hadler(message: Message):
             [
                 InlineKeyboardButton(
                     text="Web App", 
-                    web_app=types.WebAppInfo(url="https://66abe5c0388a074db14ab2a0--sparkling-nougat-ea8049.netlify.app/")
+                    web_app=types.WebAppInfo(url=URL)
                 )
             ]
         ]
@@ -38,13 +41,13 @@ async def bot_web_hadler(message: Message):
 
 @dp.message(CommandStart)
 async def start(message: Message):
-    username = message.from_user.username if message.from_user.id else f'{message.from_user.first_name} {message.from_user.last_name}'
+    username = message.from_user.username if message.from_user.username != None else f'{message.from_user.first_name} {message.from_user.last_name}'
     request = create_user(message.from_user.id, username)
     if request == 500 or request == 400:
-        await message.reply(f"Hi, {message.from_user.username}! Thank you for visiting us again")
+        await message.reply(f"Hi, {username}! Thank you for visiting us again")
     
     if request == 200: 
-        await message.reply(f'Hello, {message.from_user.username}')
+        await message.reply(f'Hello, {username}')
 
 
 async def main() -> None:
