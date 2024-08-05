@@ -12,8 +12,8 @@ export const Home = () => {
 	
 	useEffect(() => {
 	  const fetchUserData = async () => {
-		const user_id = await getUserId(tg.initDataUnsafe.user.id);
-		//const user_id = await getUserId("506652203");
+		//const user_id = await getUserId(tg.initDataUnsafe.user.id);
+		const user_id = await getUserId("506652203");
 		setUserId(user_id);
 		console.log(user_id);
   
@@ -35,6 +35,28 @@ export const Home = () => {
 	}, []);
   
 	console.log("User data: ", coins);
+
+	const handleRewardClick = () => {
+		if (userId) {
+		  fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${userId}`, {
+			method: "PUT",
+			headers: {
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ coins: 7 }) 
+		  })
+			.then((response) => response.json())
+			.then((data) => {
+			  setCoins(data);
+			  console.log("Coins has been sent for your account")
+			})
+			.catch((error) => {
+			  console.log(error);
+			});
+		}
+	  };
+	
+	  console.log("User data: ", coins);
 
 	return (
 		<section className='pt-[120px] flex flex-col'>
@@ -93,7 +115,7 @@ export const Home = () => {
 					/>
 				</svg>
 			</div>
-			<Btn text='Claim coins' />
+			<Btn text='Claim coins' onClick={handleRewardClick} />
 		</section>
 	);
 };
