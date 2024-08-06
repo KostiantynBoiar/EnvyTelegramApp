@@ -1,8 +1,9 @@
 from sqlalchemy.orm import relationship
 
 from database import Base
-from sqlalchemy import TIMESTAMP, Column, String, Boolean, Integer
+from sqlalchemy import TIMESTAMP, Column, String, Boolean, Integer, DateTime
 import secrets
+from datetime import datetime
 
 class User(Base):
     __tablename__ = 'users'
@@ -11,7 +12,7 @@ class User(Base):
     telegram_username = Column(String, default="")
     telegram_id = Column(String, nullable=False, unique=True)
     count_of_coins = Column(Integer, default=0)
-    last_time_of_the_claim = Column(String)
+    last_time_of_the_claim = Column(String, default="")
     referal_link = Column(String, unique=True, default=lambda: secrets.token_urlsafe(8))
     tasks = relationship("Task", back_populates="user")
     reffered_by = Column(Integer)

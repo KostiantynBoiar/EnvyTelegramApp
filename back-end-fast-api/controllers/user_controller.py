@@ -12,7 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 from models.user_model import User
 from database import get_db, Base, engine
 
-#Base.metadata.drop_all(bind=engine)
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -174,8 +174,10 @@ def update_last_claim_time(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
-    return {"last_time_of_the_claim": db_user.last_time_of_the_claim}
+    if db_user.last_time_of_the_claim == None:
+        db_user.last_time_of_the_claim = ""
+        return {"last_time_of_the_claim": str(db_user.last_time_of_the_claim)} 
+    return {"last_time_of_the_claim": str(db_user.last_time_of_the_claim)}
 
 
 app.include_router(router)
-

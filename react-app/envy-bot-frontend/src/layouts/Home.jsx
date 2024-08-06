@@ -6,98 +6,108 @@ import getUserId from '../utils/getUserId.jsx';
 
 export const Home = () => {
 	
-	const [coins, setCoins] = useState([]);
-	const [user, setUser] = useState(null);
-	const [canClaim, setCanClaim] = useState(false);
-	let tg = window.Telegram.WebApp;
+    const [coins, setCoins] = useState([]);
+    const [user, setUser] = useState(null);
+    const [canClaim, setCanClaim] = useState(false);
+    let tg = window.Telegram.WebApp;
+    let user_id = null;
 
-	useEffect(() => {
-		const fetchUserData = async () => {
-			//const user_id = await getUserId(tg.initDataUnsafe.user.id);
-			const user_id = await getUserId("506652203");
-			console.log('User id: ', user_id);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const user_id = await getUserId("506652203");
+            if (user_id) {
+                fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
+                    method: "GET"
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    setUser(data);
+                    checkClaimTime(data.last_time_of_the_claim);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
+        };
+        
+        fetchUserData();
+    }, []);
 
-			if (user_id) {
-				fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
-					method: "GET"
-				})
-				.then((response) => response.json())
-				.then((data) => {
-					setUser(data);
-					checkClaimTime(data.last_time_of_the_claim);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-			}
-		};
-		
-		fetchUserData();
-	}, []);
+    const checkClaimTime = (lastClaimTime) => {
+        if(lastClaimTime == None || lastClaimTime == ""){
+            setCanClaim(true)
+        }
+        if (lastClaimTime) {
+            const lastClaimDate = new Date(lastClaimTime);
+            const currentDate = new Date();
+            const diffTime = Math.abs(currentDate - lastClaimDate);
+            const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+            setCanClaim(diffHours >= 24);
+        } else {
+            setCanClaim(true);
+        }
+    };
 
-	const handleRewardClick = async () => {
-		if (user) {
-			try {
-				// Fetch the last claim time
-				const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-					method: "GET",
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				});
-	
-				if (!response.ok) {
-					throw new Error("Failed to fetch the last claim time");
-				}
-	
-				const data = await response.json();
-				const lastClaimTime = data.last_time_of_the_claim;
-				const lastClaimDate = new Date(lastClaimTime);
-				const currentDate = new Date();
-				const diffTime = Math.abs(currentDate - lastClaimDate);
-				const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-	
-				if (diffHours >= 24) {
-					// Update the last claim time
-					const updateClaimTimeResponse = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-						method: "PUT",
-						headers: {
-							'Content-Type': 'application/json'
-						}
-					});
-	
-					if (!updateClaimTimeResponse.ok) {
-						throw new Error("Failed to update the last claim time");
-					}
-	
-					// Award the coins
-					const rewardResponse = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.id}`, {
-						method: "PUT",
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({ coins: 7 })
-					});
-	
-					if (!rewardResponse.ok) {
-						throw new Error("Failed to award the coins");
-					}
-	
-					const updatedUser = await rewardResponse.json();
-					setUser(updatedUser);
-					console.log("Coins have been added to your account");
-				} else {
-					console.log("Is not available now, you can claim the reward only once per day");
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		} else {
-			console.log("You can only claim coins once every 24 hours");
-		}
-	};
-	
-	  console.log("User data: ", coins);
+    const handleRewardClick = () => {
+        if (user) {
+            fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Claim not allowed. 24 hours have not passed since the last claim.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                checkClaimTime(data.last_time_of_the_claim);
+                if (canClaim) {
+                    // Give the reward first
+                    fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.id}`, {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ coins: 7 })
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setUser(data);
+                        console.log("Coins have been added to your account");
+                        
+                        // Update the last claim time
+                        return fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setUser(data);
+                        console.log("Claim time has been updated");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                } else {
+                    console.log("Is not available now, you can claim the reward only once per day");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        } else {
+            console.log("You can only claim coins once every 24 hours");
+        }
+    };
+    
+
+    console.log("User data: ", coins);
 
 	return (
 		<section className='pt-[120px] flex flex-col'>

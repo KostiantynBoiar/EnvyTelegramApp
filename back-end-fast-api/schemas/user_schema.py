@@ -11,7 +11,7 @@ class UserBaseSchema(BaseModel):
     id: int = None
     telegram_username: str
     count_of_coins: Optional[int] = None
-    last_time_of_the_claim: Optional[str] = None
+    last_time_of_the_claim: Optional[str]
     referal_link: Optional[str] = None
     reffered_by: Optional[int] = None
     tasks: Optional[List[TaskBaseSchema]] = []
@@ -34,7 +34,7 @@ class RewardSchema(BaseModel):
     coins: int
 
 class ClaimTimeSchema(BaseModel):
-    last_time_of_the_claim: datetime
+    last_time_of_the_claim: str
 
     class Config:
         orm_mode = True
