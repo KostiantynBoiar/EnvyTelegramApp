@@ -7,54 +7,68 @@ import getUserId from '../utils/getUserId.jsx';
 export const Home = () => {
 	
 	const [coins, setCoins] = useState([]);
-	const [userId, setUserId] = useState(null);
+	const [user, setUser] = useState(null);
+	const [canClaim, setCanClaim] = useState(false);
 	let tg = window.Telegram.WebApp;
-	
+
 	useEffect(() => {
-	  const fetchUserData = async () => {
-		//const user_id = await getUserId(tg.initDataUnsafe.user.id);
-		const user_id = await getUserId("506652203");
-		setUserId(user_id);
-		console.log(user_id);
-  
-		if (user_id) {
-		  fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
-			method: "GET"
-		  })
-		  .then((response) => response.json())
-		  .then((data) => {
-			setCoins(data);
-		  })
-		  .catch((error) => {
-			console.log(error);
-		  });
-		}
-	  };
-	  
-	  fetchUserData();
+		const fetchUserData = async () => {
+			//const user_id = await getUserId(tg.initDataUnsafe.user.id);
+			const user_id = await getUserId("506652203");
+			console.log('User id: ', user_id);
+
+			if (user_id) {
+				fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
+					method: "GET"
+				})
+				.then((response) => response.json())
+				.then((data) => {
+					setUser(data);
+					checkClaimTime(data.last_time_of_the_claim);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+			}
+		};
+		
+		fetchUserData();
 	}, []);
-  
-	console.log("User data: ", coins);
+
+	const checkClaimTime = (lastClaimTime) => {
+		if (lastClaimTime) {
+			const lastClaimDate = new Date(lastClaimTime);
+			const currentDate = new Date();
+			const diffTime = Math.abs(currentDate - lastClaimDate);
+			const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+			setCanClaim(diffHours >= 24);
+		} else {
+			setCanClaim(true);
+		}
+	};
 
 	const handleRewardClick = () => {
-		if (userId) {
-		  fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${userId}`, {
-			method: "PUT",
-			headers: {
-			  'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ coins: 7 }) 
-		  })
+		if (user && canClaim) {
+			fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.id}`, {
+				method: "PUT",
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ coins: 7 })
+			})
 			.then((response) => response.json())
 			.then((data) => {
-			  setCoins(data);
-			  console.log("Coins has been sent for your account")
+				//checkClaimTime(data.last_time_of_the_claim);
+				setUser(data);
+				console.log("Coins have been added to your account");
 			})
 			.catch((error) => {
-			  console.log(error);
+				console.log(error);
 			});
+		} else {
+			console.log("You can only claim coins once every 24 hours");
 		}
-	  };
+	};
 	
 	  console.log("User data: ", coins);
 
@@ -66,7 +80,7 @@ export const Home = () => {
 			<img className='w-[286px] mx-auto mb-10' src={main_img} alt='ENVY' />
 			<div className='flex items-center gap-3 justify-center mb-8'>
 				<span className='text-[48px] leading-[61px] font-semibold '>
-				{coins.count_of_coins}.00
+				{user ? user.count_of_coins : 0}.00
 				</span>{' '}
 				<svg
 					xmlns='http://www.w3.org/2000/svg'

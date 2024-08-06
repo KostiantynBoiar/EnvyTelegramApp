@@ -2,6 +2,7 @@ from typing import Optional, List
 
 from pydantic import BaseModel
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 from schemas.task_schema import TaskBaseSchema
 
@@ -31,3 +32,9 @@ class UserCreateSchema(BaseModel):
 
 class RewardSchema(BaseModel):
     coins: int
+
+class ClaimTimeSchema(BaseModel):
+    last_time_of_the_claim: datetime
+
+    class Config:
+        orm_mode = True

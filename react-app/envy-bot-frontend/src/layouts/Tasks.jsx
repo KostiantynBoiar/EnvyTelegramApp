@@ -13,8 +13,8 @@ const Tasks = () => {
   useEffect(() => {
     const fetchUserIdAndTasks = async () => {
       try {
-		    //const id = await getUserId(tg.initDataUnsafe.user.id);
-        const id = await getUserId("506652203");
+		    const id = await getUserId(tg.initDataUnsafe.user.id);
+        //const id = await getUserId("506652203");
         setUserId(id);
 
         if (id) {

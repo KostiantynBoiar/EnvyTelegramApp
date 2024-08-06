@@ -4,15 +4,15 @@ from fastapi import FastAPI, APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from models.task_model import Task
-
-from schemas.user_schema import UserBaseSchema, UserCreateSchema, RewardSchema
+from datetime import datetime, timedelta
+from schemas.user_schema import UserBaseSchema, UserCreateSchema, RewardSchema, ClaimTimeSchema
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 
 from models.user_model import User
 from database import get_db, Base, engine
 
-#Base.metadata.drop_all(bind=engine)
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -148,6 +148,33 @@ def get_referrals_by_user_id(user_id: int, db: Session = Depends(get_db)):
     
     referrals = db.query(User).filter(User.reffered_by == user_id).all()
     return referrals
+
+
+@router.put("/claim/{user_id}", response_model=UserBaseSchema)
+def update_last_claim_time(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    current_time = datetime.utcnow()
+    if user.last_time_of_the_claim:
+        last_claim_time = datetime.fromisoformat(user.last_time_of_the_claim)
+        if (current_time - last_claim_time) < timedelta(hours=24):
+            raise HTTPException(status_code=500, detail="Claim not allowed. 24 hours have not passed since the last claim.")
+
+    user.last_time_of_the_claim = current_time.isoformat()
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+@router.get("/claim/{user_id}", response_model=ClaimTimeSchema)
+def update_last_claim_time(user_id: int, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"last_time_of_the_claim": db_user.last_time_of_the_claim}
 
 
 app.include_router(router)
