@@ -14,7 +14,8 @@ export const Home = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const user_id = await getUserId("506652203");
+		    //const user_id = await getUserId(tg.initDataUnsafe.user.id);
+            const user_id = await getUserId("506652203")
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"
@@ -32,82 +33,40 @@ export const Home = () => {
         
         fetchUserData();
     }, []);
-
-    const checkClaimTime = (lastClaimTime) => {
-        console.log("Last claim time: ", lastClaimTime)
-        if(lastClaimTime == ""){
-            setCanClaim(true)
-        }
-        if (lastClaimTime) {
-            const lastClaimDate = new Date(lastClaimTime);
-            const currentDate = new Date();
-            const diffTime = Math.abs(currentDate - lastClaimDate);
-            const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-            setCanClaim(diffHours >= 24);
-        } else {
-            setCanClaim(true);
-        }
-    };
-
-    const handleRewardClick = () => {
-        if (user) {
-            fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Claim not allowed. 24 hours have not passed since the last claim.");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                checkClaimTime(data.last_time_of_the_claim);
-                if (canClaim) {
-                    // Give the reward first
-                    fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.id}`, {
-                        method: "PUT",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ coins: 7 })
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        setUser(data);
-                        console.log("Coins have been added to your account");
-                        
-                        // Update the last claim time
-                        return fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-                            method: "PUT",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        });
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        setUser(data);
-                        console.log("Claim time has been updated");
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                } else {
-                    console.log("Is not available now, you can claim the reward only once per day");
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        } else {
-            console.log("You can only claim coins once every 24 hours");
-        }
-    };
     
+    const handleRewardClick = async () => {
+        if (!user.id) {
+            console.log('User ID is not available');
+            return;
+        }
 
+        const reward = {
+            coins: 7
+        };
+
+        try {
+            const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reward),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Error claiming reward:', errorData);
+                return;
+            }
+
+            const updatedUser = await response.json();
+            setUser(updatedUser);
+            setCoins(updatedUser.count_of_coins);
+            console.log('Reward claimed successfully:', updatedUser);
+        } catch (error) {
+            console.error('Request failed:', error);
+        }
+    };
     console.log("User data: ", coins);
 
 	return (
