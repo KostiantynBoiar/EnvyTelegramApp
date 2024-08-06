@@ -34,7 +34,8 @@ export const Home = () => {
     }, []);
 
     const checkClaimTime = (lastClaimTime) => {
-        if(lastClaimTime == None || lastClaimTime == ""){
+        console.log("Last claim time: ", lastClaimTime)
+        if(lastClaimTime == ""){
             setCanClaim(true)
         }
         if (lastClaimTime) {
