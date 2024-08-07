@@ -12,6 +12,7 @@ from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
 from flask import Flask
 from utils.api_requests import create_user
+import signal
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
@@ -62,6 +63,16 @@ async def start(message: Message):
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
+
+    loop = asyncio.get_event_loop()
+
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        loop.add_signal_handler(sig, lambda: asyncio.create_task(on_shutdown(dp)))
+
+    try:
+        loop.run_until_complete(dp.start_polling())
+    finally:
+        loop.run_until_complete(on_shutdown(dp))
 
 def run_flask():
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
