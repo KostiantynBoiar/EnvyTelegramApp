@@ -5,7 +5,7 @@ from typing import List
 
 from models.task_model import Task
 from models.user_model import User
-from schemas.task_schema import TaskBaseSchema, TaskWithUsersSchema, TaskWithForNewUsersSchema
+from schemas.task_schema import TaskBaseSchema, TaskWithUsersSchema
 
 Base.metadata.create_all(bind=engine)
 
