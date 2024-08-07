@@ -11,6 +11,7 @@ from aiogram.types import Message
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
 from utils.api_requests import *
+from aiogram.utils.deep_linking import create_start_link
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
@@ -36,11 +37,13 @@ async def bot_web_hadler(message: Message):
             ]
         ]
     )
-    await message.reply("There you go, your app: ", reply_markup = markup)
+    await message.reply("That's, your app: ", reply_markup = markup)
 
 
-@dp.message(CommandStart)
+@dp.message(CommandStart())
 async def start(message: Message):
+
+
     username = message.from_user.username if message.from_user.username != None else f'{message.from_user.first_name} {message.from_user.last_name}'
     request = create_user(message.from_user.id, username)
     if request == 500 or request == 400:
