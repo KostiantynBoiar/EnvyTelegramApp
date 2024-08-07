@@ -52,12 +52,19 @@ async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
 
-if __name__ == '__main__':
-    import threading
-
-    def start_polling():
-        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-        asyncio.run(main())
-
-    threading.Thread(target=start_polling).start()
+def run_flask():
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
+if __name__ == '__main__':
+    from multiprocessing import Process
+
+    # Start Flask in a separate process
+    flask_process = Process(target=run_flask)
+    flask_process.start()
+
+    # Start bot polling in the main process
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    asyncio.run(main())
+
+    # Ensure the Flask process is properly terminated when the main process ends
+    flask_process.join()
