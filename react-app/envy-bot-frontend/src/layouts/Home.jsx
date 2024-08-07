@@ -14,8 +14,8 @@ export const Home = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-		    //const user_id = await getUserId(tg.initDataUnsafe.user.id);
-            const user_id = await getUserId("506652203")
+		    const user_id = await getUserId(tg.initDataUnsafe.user.id);
+            //const user_id = await getUserId("506652203")
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"

@@ -5,7 +5,7 @@ from typing import List
 
 from models.task_model import Task
 from models.user_model import User
-from schemas.task_schema import TaskBaseSchema, TaskWithUsersSchema
+from schemas.task_schema import TaskBaseSchema, TaskWithUsersSchema, TaskWithForNewUsersSchema
 
 Base.metadata.create_all(bind=engine)
 
@@ -97,13 +97,3 @@ def create_task_for_all_users(task: TaskBaseSchema, db: Session = Depends(get_db
         description=description,
         users=[task.user_id for task in created_tasks]
     )
-
-
-@router.post("/new_users", response_model=TaskBaseSchema)
-def create_task_for_new_users(task: TaskBaseSchema, db: Session = Depends(get_db)):
-    task_data = task.dict()
-    db_task = Task(**task_data, for_new_users=True)
-    db.add(db_task)
-    db.commit()
-    db.refresh(db_task)
-    return db_task
