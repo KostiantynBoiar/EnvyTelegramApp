@@ -7,40 +7,36 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from aiogram import Router
 from flask import Flask
 from utils.api_requests import create_user
-import signal
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 URL = getenv("URL")
+WEBHOOK_HOST = 'https://envytelegramapp-1.onrender.com'
+WEBHOOK_PATH = f'/webhook/{TOKEN}'
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+PORT = int(os.environ.get('PORT', 5000))
 
 if TOKEN is None:
     raise ValueError("No BOT_TOKEN environment variable set")
 
-router = Router()
 app = Flask(__name__)
 
 dp = Dispatcher()
 
-"""
-@dp.message(Command("bot"))
-async def bot_web_handler(message: Message):
-    markup = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    text="Web App",
-                    web_app=types.WebAppInfo(url=URL)
-                )
-            ]
-        ]
-    )
-    await message.reply("That's your app: ", reply_markup=markup)
-"""
+@app.route('/')
+def index():
+    return "Hello, this is the Flask server!"
+
+async def on_startup(bot: Bot):
+    await bot.set_webhook(WEBHOOK_URL)
+
+async def on_shutdown(bot: Bot):
+    await bot.delete_webhook()
+
 @dp.message(CommandStart())
 async def start(message: Message):
     markup = InlineKeyboardMarkup(
@@ -60,22 +56,16 @@ async def start(message: Message):
     elif request == 200:
         await message.reply(f"Hello, {username} that's your app", reply_markup=markup)
 
-async def main() -> None:
+async def main():
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    dp.startup.register(lambda: on_startup(bot))
+    dp.shutdown.register(lambda: on_shutdown(bot))
+    dp.include_router(router)
+    
     await dp.start_polling(bot)
 
-    loop = asyncio.get_event_loop()
-
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, lambda: asyncio.create_task(on_shutdown(dp)))
-
-    try:
-        loop.run_until_complete(dp.start_polling())
-    finally:
-        loop.run_until_complete(on_shutdown(dp))
-
 def run_flask():
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(host='0.0.0.0', port=PORT)
 
 if __name__ == '__main__':
     from multiprocessing import Process
@@ -84,9 +74,12 @@ if __name__ == '__main__':
     flask_process = Process(target=run_flask)
     flask_process.start()
 
-    # Start bot polling in the main process
+    # Start bot webhook in the main process
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    asyncio.run(main())
+    
+    # Running asyncio loop in a way that prevents conflicts
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
 
     # Ensure the Flask process is properly terminated when the main process ends
     flask_process.join()
