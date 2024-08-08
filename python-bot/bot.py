@@ -22,6 +22,7 @@ if TOKEN is None:
 
 router = Router()
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
 
 dp = Dispatcher()
 
@@ -60,6 +61,7 @@ async def start(message: Message):
         await message.reply(f"Hello, {username} that's your app", reply_markup=markup)
 
 async def main() -> None:
+    logging.basicConfig(filename='myapp.log', level=logging.INFO)
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
 
