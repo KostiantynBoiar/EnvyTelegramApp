@@ -3,6 +3,7 @@ import sys
 from os import getenv
 from dotenv import load_dotenv
 from datetime import datetime
+import logging
 load_dotenv()
 
 URL = getenv("API_URL")

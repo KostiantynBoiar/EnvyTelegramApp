@@ -12,6 +12,10 @@ from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
 from flask import Flask
 from utils.api_requests import create_user
+from aiohttp import web
+from aiohttp.web_request import Request
+from aiohttp.web_response import json_response
+
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
