@@ -77,9 +77,15 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
+    
+    tasks = db.query(Task).filter(Task.user_id == user_id).all()
+    for task in tasks:
+        db.delete(task)
+    
     db.delete(db_user)
     db.commit()
     return db_user
+
 
 
 @router.post("/referral", response_model=UserBaseSchema)
