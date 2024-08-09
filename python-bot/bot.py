@@ -31,23 +31,15 @@ logger = logging.getLogger(__name__)
 
 dp = Dispatcher()
 
-"""
-@dp.message(Command("bot"))
-async def bot_web_handler(message: Message):
-    markup = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    text="Web App",
-                    web_app=types.WebAppInfo(url=URL)
-                )
-            ]
-        ]
-    )
-    await message.reply("That's your app: ", reply_markup=markup)
-"""
+
+@router.message(Command('info'))
+async def get_user_info(message: types.Message,
+                        command: CommandObject):
+    args = command.args
+    await message.answer(args)
+
 @dp.message(CommandStart())
-async def start(message: Message, command: CommandObject):
+async def start(message: Message):
     payload = command.args
     user = get_user_by_referal_link(payload)
     """
