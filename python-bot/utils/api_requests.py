@@ -27,12 +27,11 @@ def create_user(user_id: str, username: str):
         'telegram_id': f"{user_id}",
         'telegram_username': username
     }
-    # Log the data being sent
     logger.info(f"Creating user with data: {data}")
     
     try:
         response = requests.post(f'{URL}/api/v1/users/', json=data)
-        response.raise_for_status()  # This will raise an HTTPError for bad responses
+        response.raise_for_status()  
         logger.info(f"User created successfully. Status code: {response.status_code}")
         return 200
     except requests.exceptions.HTTPError as http_err:

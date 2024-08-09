@@ -18,5 +18,7 @@ class User(Base):
     reffered_by = Column(Integer)
     
     def generate_referral_link(self):
-        return secrets.token_urlsafe(8)
+        bot_username = "EnvyApp_test_bot"
+        return f"https://t.me/{bot_username}?start={self.referal_link}"
+
 
