@@ -15,6 +15,7 @@ from utils.api_requests import create_user, get_user_by_referal_link
 from aiohttp import web
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
+from aiogram.filters import Command, CommandObject
 
 
 load_dotenv()
@@ -45,9 +46,9 @@ async def bot_web_handler(message: Message):
     )
     await message.reply("That's your app: ", reply_markup=markup)
 """
-@dp.message(CommandStart())
-async def start(message: Message):
-    payload = message.get_args()
+@dp.message(Command(commands=["command"]))
+async def start(message: Message, command: CommandObject):
+    payload = command.args
     user = get_user_by_referal_link(payload)
     """
     if payload:
