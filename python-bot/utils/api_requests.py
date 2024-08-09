@@ -22,10 +22,11 @@ logger = logging.getLogger(__name__)
 
 URL = getenv("API_URL")
 
-def create_user(user_id: str, username: str):
+def create_user(user_id: str, username: str, referred_by:int):
     data = {
         'telegram_id': f"{user_id}",
-        'telegram_username': username
+        'telegram_username': username,
+        'reffered_by': referred_by
     }
     logger.info(f"Creating user with data: {data}")
     
@@ -50,7 +51,7 @@ def get_user_by_referal_link(referal_link):
         response = requests.get(f'{URL}/api/v1/users/referral/{referal_link}')
         response.raise_for_status()  
         logger.info(f"User created successfully. Status code: {response.status_code}")
-        return 200
+        return response.json()
     except requests.exceptions.HTTPError as http_err:
         logger.error(f"HTTP error occurred: {http_err}")
         return response.status_code

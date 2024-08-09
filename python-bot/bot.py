@@ -11,7 +11,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
 from flask import Flask
-from utils.api_requests import create_user
+from utils.api_requests import create_user, get_user_by_referal_link
 from aiohttp import web
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
@@ -48,7 +48,21 @@ async def bot_web_handler(message: Message):
 @dp.message(CommandStart())
 async def start(message: Message):
     payload = message.get_args()
-    
+    user = get_user_by_referal_link(payload)
+    """
+    if payload:
+        user = get_user_by_referal_link(payload)
+        if user:
+            new_user = create_user(message.from_user.id, referred_by=user.id)
+            await message.reply(f"Welcome! You were referred by {user.telegram_username}")
+        else:
+            await message.reply("Welcome! The referral code is invalid.")
+    else:
+        
+        
+"""
+    username = message.from_user.username if message.from_user.username is not None else f'{message.from_user.first_name} {message.from_user.last_name}'
+    request = create_user(message.from_user.id, username, None)
     markup = InlineKeyboardMarkup(
         inline_keyboard=[
             [
@@ -59,8 +73,6 @@ async def start(message: Message):
             ]
         ]
     )
-    username = message.from_user.username if message.from_user.username is not None else f'{message.from_user.first_name} {message.from_user.last_name}'
-    request = create_user(message.from_user.id, username)
     if request in (500, 400):
         await message.reply(f"Hi, {username}! Thank you for visiting us again, that's your app: ", reply_markup=markup)
     elif request == 200:
