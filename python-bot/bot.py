@@ -31,29 +31,7 @@ logger = logging.getLogger(__name__)
 
 dp = Dispatcher()
 
-
-@dp.message(CommandStart())
-async def start(message: Message, command: CommandObject):
-    try:
-        payload = command.args
-        await message.answer(payload)
-    except:
-        await message.answer("No command arguments")
-
-    """
-    if payload:
-        user = get_user_by_referal_link(payload)
-        if user:
-            new_user = create_user(message.from_user.id, referred_by=user.id)
-            await message.reply(f"Welcome! You were referred by {user.telegram_username}")
-        else:
-            await message.reply("Welcome! The referral code is invalid.")
-    else:
-        
-        
-
-    username = message.from_user.username if message.from_user.username is not None else f'{message.from_user.first_name} {message.from_user.last_name}'
-    request = create_user(message.from_user.id, username, None)
+def inline_keyboard():
     markup = InlineKeyboardMarkup(
         inline_keyboard=[
             [
@@ -64,11 +42,29 @@ async def start(message: Message, command: CommandObject):
             ]
         ]
     )
-    if request in (500, 400):
-        await message.reply(f"Hi, {username}! Thank you for visiting us again, that's your app: ", reply_markup=markup)
-    elif request == 200:
-        await message.reply(f"Hello, {username} that's your app", reply_markup=markup)
-"""
+    return markup
+
+@dp.message(CommandStart())
+async def start(message: Message, command: CommandObject):
+
+    username = message.from_user.username if message.from_user.username is not None else f'{message.from_user.first_name} {message.from_user.last_name}'
+    try:
+        payload = command.args
+        user = get_user_by_referal_link(payload)
+        if user:
+            request = create_user(message.from_user.id, username, referred_by=user['id'])
+            if request in (500, 400):
+                await message.reply(f"Hi, {username}! Thank you for visiting us again, that's your app: ", reply_markup=inline_keyboard())
+            if request == 200:
+                await message.reply(f"Welcome, {username}! You were referred by {user['telegram_username']}. That's your app: ", reply_markup=inline_keyboard())
+        else:
+            await message.reply("Welcome! The referral code is invalid.")        
+    except:
+        request = create_user(message.from_user.id, username, None)
+        if request in (500, 400):
+            await message.reply(f"Hi, {username}! Thank you for visiting us again, that's your app: ", reply_markup=inline_keyboard())
+        elif request == 200:
+            await message.reply(f"Hello, {username} that's your app", reply_markup=inline_keyboard())
 
 async def main() -> None:
     logging.basicConfig(filename='myapp.log', level=logging.INFO)

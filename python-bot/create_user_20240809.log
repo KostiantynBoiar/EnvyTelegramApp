@@ -49,3 +49,170 @@ client_session: <aiohttp.client.ClientSession object at 0x0000017E7FED0CE0>
 2024-08-09 13:25:49,900 - aiogram.dispatcher - WARNING - Sleep for 1.380206 seconds and try again... (tryings = 1, bot id = 7247722923)
 2024-08-09 13:25:52,546 - aiogram.dispatcher - INFO - Polling stopped
 2024-08-09 13:25:52,810 - aiogram.dispatcher - INFO - Polling stopped for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-09 13:48:10,035 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:48:12,511 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:48:12,512 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:48:14,143 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:48:21,704 - aiogram.event - INFO - Update id=851239415 is handled. Duration 218 ms by bot id=7460260215
+2024-08-09 13:48:38,198 - aiogram.event - INFO - Update id=851239416 is handled. Duration 140 ms by bot id=7460260215
+2024-08-09 13:52:29,157 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 13:52:29,416 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:52:32,164 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:52:32,283 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:52:34,501 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:52:34,502 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:52:38,241 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-09 13:52:38,456 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-09 13:52:38,788 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-09 13:52:39,006 - aiogram.event - INFO - Update id=851239417 is handled. Duration 1141 ms by bot id=7460260215
+2024-08-09 13:54:48,115 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:54:48,322 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-09 13:54:48,678 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:54:48,801 - aiogram.event - INFO - Update id=851239418 is handled. Duration 1046 ms by bot id=7460260215
+2024-08-09 13:55:47,673 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:55:47,873 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-09 13:55:48,262 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:55:48,383 - aiogram.event - INFO - Update id=851239419 is handled. Duration 1109 ms by bot id=7460260215
+2024-08-09 13:58:34,566 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 13:58:34,819 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:58:37,830 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:58:37,950 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:58:40,241 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:58:40,242 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:58:42,956 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-09 13:58:43,384 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:58:43,443 - aiogram.event - INFO - Update id=851239420 is handled. Duration 719 ms by bot id=7460260215
+2024-08-09 13:59:20,645 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 13:59:20,900 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:59:31,684 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:59:31,789 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 13:59:34,092 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:59:34,092 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:59:37,645 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-09 13:59:38,043 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 13:59:38,044 - aiogram.event - INFO - Update id=851239421 is handled. Duration 688 ms by bot id=7460260215
+2024-08-09 14:00:05,194 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:00:05,458 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:00:08,278 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:00:08,384 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:00:10,711 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:00:10,711 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:00:15,702 - aiogram.event - INFO - Update id=851239422 is handled. Duration 327 ms by bot id=7460260215
+2024-08-09 14:00:44,805 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:00:45,061 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:00:48,261 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:00:48,386 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:00:50,741 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:00:50,742 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:00:55,219 - aiogram.event - INFO - Update id=851239423 is handled. Duration 141 ms by bot id=7460260215
+2024-08-09 14:01:16,664 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:01:16,927 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:01:22,739 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:01:22,840 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:01:25,227 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:01:25,228 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:01:40,204 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:01:40,270 - aiogram.event - INFO - Update id=851239424 is handled. Duration 561 ms by bot id=7460260215
+2024-08-09 14:02:27,485 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:02:27,737 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:02:31,282 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:02:31,396 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:02:33,752 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:02:33,752 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:02:38,961 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:02:39,040 - aiogram.event - INFO - Update id=851239425 is handled. Duration 702 ms by bot id=7460260215
+2024-08-09 14:03:19,735 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:03:19,994 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:03:23,777 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:03:23,885 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:03:26,253 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:03:26,254 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:03:31,176 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:03:31,380 - aiogram.event - INFO - Update id=851239426 is handled. Duration 813 ms by bot id=7460260215
+2024-08-09 14:04:55,005 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:04:55,260 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:04:58,417 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:04:58,540 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:05:00,891 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:05:00,892 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:05:06,004 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:05:06,252 - aiogram.event - INFO - Update id=851239427 is handled. Duration 983 ms by bot id=7460260215
+2024-08-09 14:05:28,055 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:05:28,317 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:05:32,468 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:05:32,580 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:05:34,938 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:05:34,938 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:05:41,992 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:05:41,994 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': 1}
+2024-08-09 14:05:42,371 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:05:42,527 - aiogram.event - INFO - Update id=851239428 is handled. Duration 1094 ms by bot id=7460260215
+2024-08-09 14:08:01,920 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-08-09 14:08:01,920 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7460260215)
+2024-08-09 14:08:13,024 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7460260215)
+2024-08-09 14:08:13,025 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-08-09 14:08:13,026 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7460260215)
+2024-08-09 14:08:24,131 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7460260215)
+2024-08-09 14:09:34,396 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:09:34,521 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2685)
+2024-08-09 14:09:34,522 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7460260215)
+2024-08-09 14:09:34,655 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:09:44,395 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:09:44,518 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:09:46,878 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:09:46,879 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:09:52,172 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:09:52,173 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': 1}
+2024-08-09 14:09:52,532 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-09 14:09:52,532 - aiogram.event - INFO - Update id=851239429 is handled. Duration 750 ms by bot id=7460260215
+2024-08-09 14:10:16,155 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:10:16,414 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:10:19,600 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 14:10:19,715 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-09 14:10:22,049 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 14:10:22,049 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 14:10:26,405 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-09 14:10:26,407 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': 1}
+2024-08-09 14:10:26,780 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-09 14:10:26,945 - aiogram.event - INFO - Update id=851239430 is handled. Duration 891 ms by bot id=7460260215
+2024-08-09 14:11:01,305 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 14:11:01,556 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
