@@ -28,13 +28,19 @@ def create_user(user_id: str, username: str, referred_by:int):
         'telegram_username': username,
         'reffered_by': referred_by
     }
-    logger.info(f"Creating user with data: {data}")
     
+    logger.info(f"Creating user with data: {data}")
+
     try:
-        response = requests.post(f'{URL}/api/v1/users/', json=data)
-        response.raise_for_status()  
-        logger.info(f"User created successfully. Status code: {response.status_code}")
-        return 200
+        get_user_request = requests.get(f"{URL}/api/v1/users/if/{user_id}")
+        if get_user_request.status_code != 200:
+            
+            response = requests.post(f'{URL}/api/v1/users/', json=data)
+            response.raise_for_status()  
+            logger.info(f"User created successfully. Status code: {response.status_code}")
+            return 200
+        else:
+            return 500
     except requests.exceptions.HTTPError as http_err:
         logger.error(f"HTTP error occurred: {http_err}")
         return response.status_code
