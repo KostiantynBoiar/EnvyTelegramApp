@@ -46,7 +46,7 @@ async def bot_web_handler(message: Message):
     )
     await message.reply("That's your app: ", reply_markup=markup)
 """
-@dp.message(Command(commands=["command"]))
+@dp.message(CommandStart())
 async def start(message: Message, command: CommandObject):
     payload = command.args
     user = get_user_by_referal_link(payload)

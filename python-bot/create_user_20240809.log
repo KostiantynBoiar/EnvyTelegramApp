@@ -19,3 +19,33 @@ client_session: <aiohttp.client.ClientSession object at 0x0000017E7FED0CE0>
 2024-08-09 13:13:02,497 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7247722923)
 2024-08-09 13:13:04,736 - aiogram.dispatcher - INFO - Polling stopped
 2024-08-09 13:13:04,991 - aiogram.dispatcher - INFO - Polling stopped for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-09 13:23:17,153 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:23:17,271 - aiogram.dispatcher - INFO - Run polling for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-09 13:23:19,620 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:23:19,621 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:23:21,367 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:23:21,368 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7247722923)
+2024-08-09 13:23:26,812 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:23:26,812 - aiogram.dispatcher - WARNING - Sleep for 1.263702 seconds and try again... (tryings = 1, bot id = 7247722923)
+2024-08-09 13:23:32,127 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:23:32,128 - aiogram.dispatcher - WARNING - Sleep for 1.503216 seconds and try again... (tryings = 2, bot id = 7247722923)
+2024-08-09 13:23:37,690 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:23:37,691 - aiogram.dispatcher - WARNING - Sleep for 1.944390 seconds and try again... (tryings = 3, bot id = 7247722923)
+2024-08-09 13:23:44,076 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:23:44,077 - aiogram.dispatcher - WARNING - Sleep for 2.558899 seconds and try again... (tryings = 4, bot id = 7247722923)
+2024-08-09 13:25:40,459 - aiogram.dispatcher - INFO - Start polling
+2024-08-09 13:25:40,584 - aiogram.dispatcher - INFO - Run polling for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-09 13:25:43,902 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-09 13:25:43,902 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-09 13:25:44,679 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:25:44,679 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7247722923)
+2024-08-09 13:25:49,899 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-09 13:25:49,900 - aiogram.dispatcher - WARNING - Sleep for 1.380206 seconds and try again... (tryings = 1, bot id = 7247722923)
+2024-08-09 13:25:52,546 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-09 13:25:52,810 - aiogram.dispatcher - INFO - Polling stopped for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
