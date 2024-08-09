@@ -32,14 +32,14 @@ logger = logging.getLogger(__name__)
 dp = Dispatcher()
 
 
-@router.message(Command('info'))
-async def get_user_info(message: types.Message,
-                        command: CommandObject):
-    args = command.args
-    await message.answer(args)
-
 @dp.message(CommandStart())
-async def start(message: Message):
+async def start(message: Message, command: CommandObject):
+    try:
+        payload = command.args
+        await message.answer(payload)
+    except:
+        await message.answer("No command arguments")
+
     """
     if payload:
         user = get_user_by_referal_link(payload)
@@ -51,7 +51,7 @@ async def start(message: Message):
     else:
         
         
-"""
+
     username = message.from_user.username if message.from_user.username is not None else f'{message.from_user.first_name} {message.from_user.last_name}'
     request = create_user(message.from_user.id, username, None)
     markup = InlineKeyboardMarkup(
@@ -68,6 +68,7 @@ async def start(message: Message):
         await message.reply(f"Hi, {username}! Thank you for visiting us again, that's your app: ", reply_markup=markup)
     elif request == 200:
         await message.reply(f"Hello, {username} that's your app", reply_markup=markup)
+"""
 
 async def main() -> None:
     logging.basicConfig(filename='myapp.log', level=logging.INFO)
