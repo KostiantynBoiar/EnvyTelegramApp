@@ -40,8 +40,6 @@ async def get_user_info(message: types.Message,
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    payload = command.args
-    user = get_user_by_referal_link(payload)
     """
     if payload:
         user = get_user_by_referal_link(payload)
