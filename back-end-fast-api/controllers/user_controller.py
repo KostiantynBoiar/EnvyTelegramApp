@@ -181,4 +181,12 @@ def get_last_claim_time(user_id: int, db: Session = Depends(get_db)):
     return {"last_time_of_the_claim": str(db_user.last_time_of_the_claim)}
 
 
+@router.get("/referral/{referral_link}", response_model=UserBaseSchema)
+def get_user_by_referral_link(referral_link: str, db: Session = Depends(get_db)):
+    
+    db_user = db.query(User).filter(User.referal_link == referral_link).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
+
 app.include_router(router)

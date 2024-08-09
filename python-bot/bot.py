@@ -47,6 +47,8 @@ async def bot_web_handler(message: Message):
 """
 @dp.message(CommandStart())
 async def start(message: Message):
+    payload = message.get_args()
+    
     markup = InlineKeyboardMarkup(
         inline_keyboard=[
             [
