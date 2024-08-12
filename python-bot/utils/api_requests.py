@@ -34,7 +34,6 @@ def create_user(user_id: str, username: str, referred_by:int):
     try:
         get_user_request = requests.get(f"{URL}/api/v1/users/if/{user_id}")
         if get_user_request.status_code != 200:
-            
             response = requests.post(f'{URL}/api/v1/users/', json=data)
             response.raise_for_status()  
             logger.info(f"User created successfully. Status code: {response.status_code}")

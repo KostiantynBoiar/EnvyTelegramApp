@@ -15,7 +15,6 @@ class TaskBaseSchema(BaseModel):
         orm_mode = True
 
 
-
 class TaskWithUsersSchema(BaseModel):
     id: int
     title: str
