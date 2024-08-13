@@ -24,7 +24,7 @@ URL = getenv("API_URL")
 
 def create_user(user_id: str, username: str, referred_by:int):
     data = {
-        'telegram_id': f"{user_id}",
+        'telegram_id': str(f"{user_id}"),
         'telegram_username': username,
         'reffered_by': referred_by
     }
