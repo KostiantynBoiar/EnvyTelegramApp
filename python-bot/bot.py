@@ -69,9 +69,14 @@ async def start(message: Message, command: CommandObject):
 async def main() -> None:
     logging.basicConfig(filename='myapp.log', level=logging.INFO)
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-    bot.infinity_polling(timeout=10, long_polling_timeout = 5)
 
-    await dp.start_polling(bot)
+    while True:  
+        try:
+            await dp.start_polling(bot)
+            # await dp.start_polling(bot, handle_signals=False)
+        except Exception as e:
+            logging.error(f"Polling stopped due to: {e}")
+            await asyncio.sleep(5)  
 
 def run_flask():
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
