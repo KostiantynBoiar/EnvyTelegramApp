@@ -6,6 +6,8 @@ from typing import List, Optional
 from models.task_model import Task
 from datetime import datetime, timedelta
 from schemas.user_schema import UserBaseSchema, UserCreateSchema, RewardSchema, ClaimTimeSchema
+from schemas.task_schema import TaskBaseSchema
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../models'))
 
@@ -194,5 +196,17 @@ def get_user_by_referral_link(referral_link: str, db: Session = Depends(get_db))
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+
+@router.delete("/{user_id}/tasks/{task_id}", response_model=TaskBaseSchema)
+def delete_task(user_id: int, task_id: int, db: Session = Depends(get_db)):
+    task = db.query(Task).filter(Task.id == task_id, Task.user_id == user_id).first()
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    db.delete(task)
+    db.commit()
+    return task
+
 
 app.include_router(router)

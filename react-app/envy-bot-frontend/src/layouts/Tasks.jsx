@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import img from '../assets/main_img.png';
 import Btn from '../components/Btn';
-import ListItem from '../components/ListItem';
+import ListItemTasks from '../components/ListItemTasks';
 import getUserId from '../utils/getUserId.jsx';
 
 const Tasks = () => {
@@ -13,8 +13,8 @@ const Tasks = () => {
   useEffect(() => {
     const fetchUserIdAndTasks = async () => {
       try {
-		    const id = await getUserId(tg.initDataUnsafe.user.id);
-        //const id = await getUserId("506652203");
+		    //const id = await getUserId(tg.initDataUnsafe.user.id);
+        const id = await getUserId("506652203");
         setUserId(id);
 
         if (id) {
@@ -53,8 +53,9 @@ const Tasks = () => {
       <Btn text='Claim reward' />
       <ul className='flex flex-col gap-3 relative z-10'>
         {tasks.map(task => (
-          <ListItem
+          <ListItemTasks
             key={task.id}
+            description_link={task.description}
             name={task.title}
             plus={task.award}
           />
