@@ -10,11 +10,11 @@ load_dotenv()
 
 # Set up logging configuration
 logging.basicConfig(
-    level=logging.INFO,  # Log level can be set to DEBUG, INFO, WARNING, ERROR, or CRITICAL
+    level=logging.INFO,  
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),  # Log to stdout
-        logging.FileHandler(f'create_user_{datetime.now().strftime("%Y%m%d")}.log'),  # Log to a file
+        logging.FileHandler(f'create_user_{datetime.now().strftime("%Y%m%d")}.log'),  
     ]
 )
 
