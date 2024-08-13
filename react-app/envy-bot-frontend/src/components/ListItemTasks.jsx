@@ -2,7 +2,9 @@ import React from 'react';
 
 const ListItem = ({ name, plus, icon, description_link, onClickEvent }) => {
 	return (
-		<li className='flex items-center justify-between w-full list_item rounded-[18.48px] bg-white'>
+		<li className='flex items-center justify-between w-full list_item rounded-[18.48px] bg-white' 
+		onClick={onClickEvent}
+		style={{ cursor: "pointer" }}>
 			<div className='flex items-center'>
 			{icon && (
 				<svg
@@ -19,7 +21,7 @@ const ListItem = ({ name, plus, icon, description_link, onClickEvent }) => {
 					/>
 				</svg>
 			)}
-			<p className='text-black font-semibold'><a href={description_link}>{name}</a></p>
+			<p className='text-black font-semibold'>{name}</p>
 			</div>
 			<div className='text-[#2972FF] text-[26px] font-semibold leading-[33px] tracking-[1.3px] flex items-center gap-[10px]'>
 				<p>+{plus}</p>
