@@ -9,7 +9,7 @@ export const Home = () => {
     const [coins, setCoins] = useState([]);
     const [user, setUser] = useState(null);
     const [canClaim, setCanClaim] = useState(false);
-	const [textAfterClick, setTextAfterClick] = useState("")
+	const [textAfterClick, setTextAfterClick] = useState("Not available yet")
     let tg = window.Telegram.WebApp;
     let user_id = null;
 
@@ -36,51 +36,54 @@ export const Home = () => {
     }, []);
     
 	const handleRewardClick = async () => {
-        if (!user.id) {
-            console.log('User ID is not available');
-            return;
-        }
 
-        const reward = {
-            coins: 7
-        };
+		const reward = { coins: 7 };
+	
+		try {
+			const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(reward),
+			});
+	
+			if (response.ok) {
+				const updatedUser = await response.json();
+				setUser(updatedUser);
+				setCoins(updatedUser.count_of_coins);
+				setTextAfterClick("Process farm...");
+				console.log('Reward claimed successfully:', updatedUser);
+				try{
+					await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.reffered_by}`, {
+						method: 'PUT',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({coins: 1}),
+					});
+				}catch(err){
+					console.log("User has no refferer")
+				}
 
-        try {
-            const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(reward),
-            });
-
-            switch (response.status) {
-                case 200:
-                    const updatedUser = await response.json();
-                    setUser(updatedUser);
-                    setCoins(updatedUser.count_of_coins);
-                    setTextAfterClick("Process farm...");
-                    console.log('Reward claimed successfully:', updatedUser);
-                    break;
-                case 404:
-                    setTextAfterClick("User not found");
-                    console.error('User not found');
-                    break;
-                case 500:
-                    setTextAfterClick("Not available yet ");
-                    console.error('Claiming coins is not available yet');
-                    break;
-                default:
-                    setTextAfterClick("Something went wrong");
-                    console.error('Something went wrong');
-                    break;
-            }
-        } catch (error) {
-            setTextAfterClick("Something went wrong");
-            console.error('Request failed:', error);
-        }
-    };
-
+			} else {
+				switch (response.status) {
+					case 404:
+						setTextAfterClick("User not found");
+						console.error('User not found');
+						break;
+					case 500:
+						setTextAfterClick("Not available yet");
+						console.error('Claiming coins is not available yet');
+						break;
+					default:
+						setTextAfterClick("Something went wrong");
+						console.error('Something went wrong');
+						break;
+				}
+			}
+		} catch (error) {
+			setTextAfterClick("Something went wrong");
+			console.error('Request failed:', error);
+		}
+	};
+	
     console.log("User data: ", coins);
 
 	return (

@@ -7,14 +7,14 @@ import getUserId from '../utils/getUserId.jsx';
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
   let tg = window.Telegram.WebApp;
-
   useEffect(() => {
     const fetchUserIdAndTasks = async () => {
       try {
-        const id = await getUserId(tg.initDataUnsafe.user.id);
-        //const id = await getUserId("506652203");
+        //const id = await getUserId(tg.initDataUnsafe.user.id);
+        const id = await getUserId("506652203");
         setUserId(id);
 
         if (id) {
@@ -36,14 +36,12 @@ const Tasks = () => {
         setLoading(false);
       }
     };
-
     fetchUserIdAndTasks();
   }, []);
 
   const handleTaskClick = async (task, event) => {
-    event.preventDefault(); // Prevent default anchor behavior
+    event.preventDefault(); 
     try {
-      // Award the user
       await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${userId}`, {
         method: "PUT",
         headers: {
@@ -52,7 +50,6 @@ const Tasks = () => {
         body: JSON.stringify({ coins: task.award })
       });
   
-      // Delete the task
       await fetch(`https://envytelegramapp.onrender.com/api/v1/users/${userId}/tasks/${task.id}`, {
         method: "DELETE"
       });
