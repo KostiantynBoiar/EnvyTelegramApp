@@ -9,6 +9,7 @@ export const Home = () => {
     const [coins, setCoins] = useState([]);
     const [user, setUser] = useState(null);
     const [canClaim, setCanClaim] = useState(false);
+	const [textAfterClick, setTextAfterClick] = useState("")
     let tg = window.Telegram.WebApp;
     let user_id = null;
 
@@ -126,7 +127,7 @@ export const Home = () => {
 					/>
 				</svg>
 			</div>
-			<Btn text='Claim coins' onClick={handleRewardClick} />
+			<Btn text='Claim coins' afterClickText="Process farm..." onClick={handleRewardClick} />
 		</section>
 	);
 };

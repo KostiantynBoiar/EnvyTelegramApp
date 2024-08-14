@@ -10,7 +10,6 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Router
-from flask import Flask
 from utils.api_requests import create_user, get_user_by_referal_link
 from aiohttp import web
 from aiohttp.web_request import Request
@@ -26,7 +25,6 @@ if TOKEN is None:
     raise ValueError("No BOT_TOKEN environment variable set")
 
 router = Router()
-app = Flask(__name__)
 logger = logging.getLogger(__name__)
 
 dp = Dispatcher()
@@ -82,12 +80,14 @@ def run_flask():
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 
 if __name__ == '__main__':
+    """
     from multiprocessing import Process
 
     flask_process = Process(target=run_flask)
     flask_process.start()
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    asyncio.run(main())
 
     flask_process.join()
+"""
+    asyncio.run(main())

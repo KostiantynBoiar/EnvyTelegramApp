@@ -132,3 +132,51 @@
 2024-08-13 21:19:07,403 - aiogram.event - INFO - Update id=851239494 is handled. Duration 1203 ms by bot id=7460260215
 2024-08-13 21:19:13,637 - aiogram.dispatcher - INFO - Polling stopped
 2024-08-13 21:19:13,898 - aiogram.dispatcher - INFO - Polling stopped for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-13 21:19:17,561 - aiogram.dispatcher - INFO - Start polling
+2024-08-13 21:19:17,664 - aiogram.dispatcher - INFO - Run polling for bot @AppDevEnvyTest_bot id=7460260215 - 'AppDevEnvyTest'
+2024-08-13 21:19:19,856 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.17:5000
+2024-08-13 21:19:19,857 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-08-13 21:19:35,391 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 21:19:35,392 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 21:19:36,060 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 21:19:36,179 - aiogram.event - INFO - Update id=851239495 is handled. Duration 1156 ms by bot id=7460260215
+2024-08-13 21:35:47,334 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 21:35:47,336 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 21:35:48,061 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 21:35:48,064 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-08-13 21:35:48,064 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7460260215)
+2024-08-13 21:35:48,218 - aiogram.event - INFO - Update id=851239496 is handled. Duration 69516 ms by bot id=7460260215
+2024-08-13 21:35:49,090 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7460260215)
+2024-08-13 21:35:49,484 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 21:35:49,485 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 21:35:50,159 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 21:35:50,281 - aiogram.event - INFO - Update id=851239497 is handled. Duration 1186 ms by bot id=7460260215
+2024-08-13 21:50:09,168 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 21:50:09,169 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 21:50:09,880 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 21:50:09,995 - aiogram.event - INFO - Update id=851239498 is handled. Duration 1187 ms by bot id=7460260215
+2024-08-13 21:57:33,807 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 21:57:33,808 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 21:57:34,562 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 21:57:34,730 - aiogram.event - INFO - Update id=851239499 is handled. Duration 1296 ms by bot id=7460260215
+2024-08-13 22:05:13,147 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 22:05:13,148 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 22:05:13,860 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 22:05:13,973 - aiogram.event - INFO - Update id=851239500 is handled. Duration 1203 ms by bot id=7460260215
+2024-08-13 22:13:04,259 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 22:13:04,261 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 22:13:04,987 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 22:13:05,118 - aiogram.event - INFO - Update id=851239501 is handled. Duration 1233 ms by bot id=7460260215
+2024-08-13 22:48:53,402 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 22:48:53,404 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 22:48:54,071 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 22:48:54,479 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-13 22:48:54,481 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6497539945', 'telegram_username': 'Kostiantyn Boiar', 'reffered_by': None}
+2024-08-13 22:48:55,152 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-13 22:48:55,229 - aiogram.event - INFO - Update id=851239502 is handled. Duration 55514 ms by bot id=7460260215
+2024-08-13 22:48:55,293 - aiogram.event - INFO - Update id=851239503 is handled. Duration 1188 ms by bot id=7460260215
+2024-08-13 22:53:22,119 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-13 22:53:22,120 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7460260215)

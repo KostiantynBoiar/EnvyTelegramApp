@@ -66,7 +66,6 @@ const Friends = () => {
 				if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
 					try {
 						await navigator.clipboard.writeText(referralLink);
-						alert("Referral link copied to clipboard!");
 					} catch (err) {
 						try{
 							copy(referralLink)
@@ -94,7 +93,7 @@ const Friends = () => {
         <section className='pt-[118px] flex flex-col'>
             <h2 className='text-3xl mb-4 text-center'>ENVY</h2>
             <img className='w-[175px] mx-auto mb-8' src={img} alt='ENVY' />
-            <Btn text='To invite a friend' onClick={handleCopyReferralLink} />
+            <Btn text='To invite a friend' afterClickText="Link has been copied" onClick={handleCopyReferralLink} />
             <ul className='flex flex-col gap-3 relative z-10'>
                 {friends.map((friend, index) => (
                     <ListItem
