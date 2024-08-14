@@ -15,8 +15,8 @@ export const Home = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-		    const user_id = await getUserId(tg.initDataUnsafe.user.id);
-            //const user_id = await getUserId("506652203")
+		    //const user_id = await getUserId(tg.initDataUnsafe.user.id);
+            const user_id = await getUserId("506652203")
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"
@@ -35,7 +35,7 @@ export const Home = () => {
         fetchUserData();
     }, []);
     
-    const handleRewardClick = async () => {
+	const handleRewardClick = async () => {
         if (!user.id) {
             console.log('User ID is not available');
             return;
@@ -54,20 +54,33 @@ export const Home = () => {
                 body: JSON.stringify(reward),
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Error claiming reward:', errorData);
-                return;
+            switch (response.status) {
+                case 200:
+                    const updatedUser = await response.json();
+                    setUser(updatedUser);
+                    setCoins(updatedUser.count_of_coins);
+                    setTextAfterClick("Process farm...");
+                    console.log('Reward claimed successfully:', updatedUser);
+                    break;
+                case 404:
+                    setTextAfterClick("User not found");
+                    console.error('User not found');
+                    break;
+                case 500:
+                    setTextAfterClick("Not available yet ");
+                    console.error('Claiming coins is not available yet');
+                    break;
+                default:
+                    setTextAfterClick("Something went wrong");
+                    console.error('Something went wrong');
+                    break;
             }
-
-            const updatedUser = await response.json();
-            setUser(updatedUser);
-            setCoins(updatedUser.count_of_coins);
-            console.log('Reward claimed successfully:', updatedUser);
         } catch (error) {
+            setTextAfterClick("Something went wrong");
             console.error('Request failed:', error);
         }
     };
+
     console.log("User data: ", coins);
 
 	return (
@@ -127,7 +140,7 @@ export const Home = () => {
 					/>
 				</svg>
 			</div>
-			<Btn text='Claim coins' afterClickText="Process farm..." onClick={handleRewardClick} />
+			<Btn text='Claim coins' afterClickText={textAfterClick} onClick={handleRewardClick} />
 		</section>
 	);
 };
