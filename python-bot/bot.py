@@ -15,11 +15,13 @@ from aiohttp import web
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from aiogram.filters import Command, CommandObject
+from flask import Flask
 
 
 load_dotenv()
 TOKEN = getenv("BOT_TOKEN")
 URL = getenv("URL")
+app = Flask(__name__)
 
 if TOKEN is None:
     raise ValueError("No BOT_TOKEN environment variable set")
@@ -70,8 +72,8 @@ async def main() -> None:
 
     while True:  
         try:
-            await dp.start_polling(bot)
-            # await dp.start_polling(bot, handle_signals=False)
+            #await dp.start_polling(bot)
+            await dp.start_polling(bot, handle_signals=False)
         except Exception as e:
             logging.error(f"Polling stopped due to: {e}")
             await asyncio.sleep(5)  
@@ -80,14 +82,6 @@ def run_flask():
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 
 if __name__ == '__main__':
-    """
-    from multiprocessing import Process
-
-    flask_process = Process(target=run_flask)
-    flask_process.start()
-
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-
-    flask_process.join()
-"""
+    
     asyncio.run(main())
+
