@@ -9,6 +9,8 @@ const Tasks = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [text, setText] = useState("Press on the task")
+
   let tg = window.Telegram.WebApp;
   useEffect(() => {
     const fetchUserIdAndTasks = async () => {
@@ -75,7 +77,7 @@ const Tasks = () => {
     <section className='pt-[118px] flex flex-col'>
       <h2 className='text-3xl mb-4 text-center'>ENVY</h2>
       <img className='w-[175px] mx-auto mb-8' src={img} alt='ENVY' />
-      <Btn text='Press on the task'/>
+      <Btn text={text} afterClickText={text}/>
       <ul className='flex flex-col gap-3 relative z-10'>
       {tasks.map(task => (
         <ListItemTasks
