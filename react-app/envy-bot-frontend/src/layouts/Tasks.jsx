@@ -75,7 +75,7 @@ const Tasks = () => {
     <section className='pt-[118px] flex flex-col'>
       <h2 className='text-3xl mb-4 text-center'>ENVY</h2>
       <img className='w-[175px] mx-auto mb-8' src={img} alt='ENVY' />
-      <Btn text='Claim reward' disabled/>
+      <Btn text='Press on the task'/>
       <ul className='flex flex-col gap-3 relative z-10'>
       {tasks.map(task => (
         <ListItemTasks
