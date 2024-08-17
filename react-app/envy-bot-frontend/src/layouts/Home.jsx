@@ -10,6 +10,7 @@ export const Home = () => {
     const [user, setUser] = useState(null);
     const timeLeft = useCountdown(user ? user.last_time_of_the_claim : null);
     const [text, setText] = useState("Claim reward");
+    let tg = window.Telegram.WebApp;
 
     useEffect(() => {
         if (timeLeft !== "00:00:00") {
