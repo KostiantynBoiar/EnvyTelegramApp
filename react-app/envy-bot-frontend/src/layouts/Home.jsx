@@ -8,23 +8,22 @@ import useCountdown from '../utils/useCountdown.jsx';
 export const Home = () => {
     const [coins, setCoins] = useState([]);
     const [user, setUser] = useState(null);
-	const timeLeft = useCountdown(user ? user.last_time_of_the_claim : null);
-
+    const timeLeft = useCountdown(user ? user.last_time_of_the_claim : null);
     const [text, setText] = useState("Claim reward");
 
-	useEffect(() => {
-		if(timeLeft != "00:00:00" && text != "Not available now"){
-			setText("Not available now")
-		}
-	})
-    let tg = window.Telegram.WebApp;
-
+    useEffect(() => {
+        if (timeLeft !== "00:00:00") {
+            setText("Not available now");
+        } else {
+            setText("Claim reward");
+        }
+    }, [timeLeft]);
 
     useEffect(() => {
         const fetchUserData = async () => {
 			const user_id = await getUserId(tg.initDataUnsafe.user.id);
 
-			//const user_id = await getUserId("506652203");
+            //const user_id = await getUserId("506652203");
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"
