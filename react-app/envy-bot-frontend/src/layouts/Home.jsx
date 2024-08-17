@@ -2,19 +2,29 @@ import main_img from '../assets/main_img.png';
 import Btn from '../components/Btn';
 import React, { useState, useEffect } from 'react';
 import getUserId from '../utils/getUserId.jsx';
+import useCountdown from '../utils/useCountdown.jsx';
 
 
 export const Home = () => {
     const [coins, setCoins] = useState([]);
     const [user, setUser] = useState(null);
-    const [canClaim, setCanClaim] = useState(false);
-	const [textAfterClick, setTextAfterClick] = useState("Process farm...");
+	const timeLeft = useCountdown(user ? user.last_time_of_the_claim : null);
+
+    const [text, setText] = useState("Claim reward");
+
+	useEffect(() => {
+		if(timeLeft != "00:00:00" && text != "Not available now"){
+			setText("Not available now")
+		}
+	})
     let tg = window.Telegram.WebApp;
-    let user_id = null;
+
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const user_id = await getUserId("506652203")
+			const user_id = await getUserId(tg.initDataUnsafe.user.id);
+
+			//const user_id = await getUserId("506652203");
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"
@@ -22,55 +32,36 @@ export const Home = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     setUser(data);
-                    checkClaimTime(data.last_time_of_the_claim);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
             }
         };
-        
+
         fetchUserData();
     }, []);
 
-	const calculateTimeLeft = (lastClaimTime) => {
-		const claimInterval = 24 * 60 * 60 * 1000; 
-	
-		const lastClaimTimeInUTC1 = new Date(new Date(lastClaimTime).toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
-	
-		const nextClaimTimeInUTC1 = lastClaimTimeInUTC1 + claimInterval;
-	
-		const currentTimeInUTC1 = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
-	
-		const timeLeft = nextClaimTimeInUTC1 - currentTimeInUTC1;
-	
-		if (timeLeft > 0) {
-			const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-			const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-			const seconds = Math.floor((timeLeft / 1000) % 60);
-			return `${hours}:${minutes}:${seconds}`;
-		} else {
-			return "00:00:00";
-		}
-	};
-	
-	
-
     const handleRewardClick = async () => {
+        if (timeLeft !== "00:00:00") {
+            alert(`Time left until next claim: ${timeLeft}`);
+            return;
+        }
+
         const reward = { coins: 7 };
-    
+
         try {
             const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(reward),
             });
-    
+
             if (response.ok) {
                 const updatedUser = await response.json();
                 setUser(updatedUser);
                 setCoins(updatedUser.count_of_coins);
-                setTextAfterClick("Process farm...");
+                setText("Process farm...");
                 console.log('Reward claimed successfully:', updatedUser);
 
                 try {
@@ -84,28 +75,21 @@ export const Home = () => {
                 }
 
             } else {
-
-                const timeLeft = calculateTimeLeft(user.last_time_of_the_claim);
-				console.log(timeLeft)
                 alert(`Time left until next claim: ${timeLeft}`);
 
                 switch (response.status) {
                     case 404:
-                        setTextAfterClick("User not found");
+                        setText("User not found");
                         console.error('User not found');
                         break;
-                    case 500:
-                        setTextAfterClick("Not available yet");
-                        console.error('Claiming coins is not available yet');
-                        break;
                     default:
-                        setTextAfterClick("Something went wrong");
+                        setText("Something went wrong");
                         console.error('Something went wrong');
                         break;
                 }
             }
         } catch (error) {
-            setTextAfterClick("Something went wrong");
+            setText("Something went wrong");
             console.error('Request failed:', error);
         }
     };
@@ -169,7 +153,8 @@ export const Home = () => {
 					/>
 				</svg>
 			</div>
-			<Btn text='Claim coins' afterClickText={textAfterClick} onClick={handleRewardClick} />
+			<a>{timeLeft !== '00:00:00' ? "Time until claim: " + timeLeft : ""}</a>
+			<Btn text={text} afterClickText={text} onClick={handleRewardClick} disabled={timeLeft != "00:00:00" ? true : false} />
 		</section>
 	);
 };
