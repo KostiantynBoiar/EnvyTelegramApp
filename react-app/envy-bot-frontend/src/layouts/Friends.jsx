@@ -60,7 +60,7 @@ const Friends = () => {
 			const userData = await response.json();
 	
 			if (userData && userData.referal_link) {
-				const referralLink = `https://t.me/https://t.me/EnvyApp_test_bot?start=${userData.referal_link}`;
+				const referralLink = `https://t.me/EnvyApp_test_bot?start=${userData.referal_link}`;
 				setReferralLink(referralLink);
 	
 				if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {

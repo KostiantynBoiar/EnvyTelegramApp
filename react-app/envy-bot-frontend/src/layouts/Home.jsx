@@ -5,17 +5,15 @@ import getUserId from '../utils/getUserId.jsx';
 
 
 export const Home = () => {
-	
     const [coins, setCoins] = useState([]);
     const [user, setUser] = useState(null);
     const [canClaim, setCanClaim] = useState(false);
-	const [textAfterClick, setTextAfterClick] = useState("Not available yet")
+	const [textAfterClick, setTextAfterClick] = useState("Process farm...");
     let tg = window.Telegram.WebApp;
     let user_id = null;
 
     useEffect(() => {
         const fetchUserData = async () => {
-		    //const user_id = await getUserId(tg.initDataUnsafe.user.id);
             const user_id = await getUserId("506652203")
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
@@ -34,56 +32,84 @@ export const Home = () => {
         
         fetchUserData();
     }, []);
-    
-	const handleRewardClick = async () => {
 
-		const reward = { coins: 7 };
+	const calculateTimeLeft = (lastClaimTime) => {
+		const claimInterval = 24 * 60 * 60 * 1000; 
 	
-		try {
-			const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(reward),
-			});
+		const lastClaimTimeInUTC1 = new Date(new Date(lastClaimTime).toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
 	
-			if (response.ok) {
-				const updatedUser = await response.json();
-				setUser(updatedUser);
-				setCoins(updatedUser.count_of_coins);
-				setTextAfterClick("Process farm...");
-				console.log('Reward claimed successfully:', updatedUser);
-				try{
-					await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.reffered_by}`, {
-						method: 'PUT',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify({coins: 1}),
-					});
-				}catch(err){
-					console.log("User has no refferer")
-				}
-
-			} else {
-				switch (response.status) {
-					case 404:
-						setTextAfterClick("User not found");
-						console.error('User not found');
-						break;
-					case 500:
-						setTextAfterClick("Not available yet");
-						console.error('Claiming coins is not available yet');
-						break;
-					default:
-						setTextAfterClick("Something went wrong");
-						console.error('Something went wrong');
-						break;
-				}
-			}
-		} catch (error) {
-			setTextAfterClick("Something went wrong");
-			console.error('Request failed:', error);
+		const nextClaimTimeInUTC1 = lastClaimTimeInUTC1 + claimInterval;
+	
+		const currentTimeInUTC1 = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
+	
+		const timeLeft = nextClaimTimeInUTC1 - currentTimeInUTC1;
+	
+		if (timeLeft > 0) {
+			const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+			const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+			const seconds = Math.floor((timeLeft / 1000) % 60);
+			return `${hours}:${minutes}:${seconds}`;
+		} else {
+			return "00:00:00";
 		}
 	};
 	
+	
+
+    const handleRewardClick = async () => {
+        const reward = { coins: 7 };
+    
+        try {
+            const response = await fetch(`https://envytelegramapp.onrender.com/api/v1/users/claim/${user.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reward),
+            });
+    
+            if (response.ok) {
+                const updatedUser = await response.json();
+                setUser(updatedUser);
+                setCoins(updatedUser.count_of_coins);
+                setTextAfterClick("Process farm...");
+                console.log('Reward claimed successfully:', updatedUser);
+
+                try {
+                    await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${user.reffered_by}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({coins: 1}),
+                    });
+                } catch (err) {
+                    console.log("User has no refferer");
+                }
+
+            } else {
+
+                const timeLeft = calculateTimeLeft(user.last_time_of_the_claim);
+				console.log(timeLeft)
+                alert(`Time left until next claim: ${timeLeft}`);
+
+                switch (response.status) {
+                    case 404:
+                        setTextAfterClick("User not found");
+                        console.error('User not found');
+                        break;
+                    case 500:
+                        setTextAfterClick("Not available yet");
+                        console.error('Claiming coins is not available yet');
+                        break;
+                    default:
+                        setTextAfterClick("Something went wrong");
+                        console.error('Something went wrong');
+                        break;
+                }
+            }
+        } catch (error) {
+            setTextAfterClick("Something went wrong");
+            console.error('Request failed:', error);
+        }
+    };
+
     console.log("User data: ", coins);
 
 	return (
