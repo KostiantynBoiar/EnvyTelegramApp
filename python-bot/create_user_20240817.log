@@ -1,2 +1,6 @@
 2024-08-17 22:49:50,212 - aiogram.dispatcher - INFO - Start polling
 2024-08-17 22:49:50,329 - aiogram.dispatcher - INFO - Run polling for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-17 22:49:58,852 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 22:49:58,854 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 22:49:59,529 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 22:49:59,697 - aiogram.event - INFO - Update id=168164799 is handled. Duration 1233 ms by bot id=7247722923
