@@ -22,8 +22,8 @@ export const Home = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-			const user_id = await getUserId(tg.initDataUnsafe.user.id);
-            //const user_id = await getUserId("506652203");
+			//const user_id = await getUserId(tg.initDataUnsafe.user.id);
+            const user_id = await getUserId("506652203");
             if (user_id) {
                 fetch(`https://envytelegramapp.onrender.com/api/v1/users/${user_id}`, {
                     method: "GET"
@@ -61,6 +61,8 @@ export const Home = () => {
                 setUser(updatedUser);
                 setCoins(updatedUser.count_of_coins);
                 setText("Process farm...");
+                //await new Promise(resolve => setTimeout(resolve, 1000));
+                setText(timeLeft)
                 console.log('Reward claimed successfully:', updatedUser);
 
                 try {
@@ -152,8 +154,7 @@ export const Home = () => {
 					/>
 				</svg>
 			</div>
-			<a>{timeLeft !== '00:00:00' ? "Time until claim: " + timeLeft : ""}</a>
-			<Btn text={text} afterClickText={text} onClick={handleRewardClick} disabled={timeLeft != "00:00:00" ? true : false} />
+			<Btn text={timeLeft != "00:00:00" ? timeLeft : "Claim reward"} afterClickText={text} onClick={handleRewardClick} disabled={timeLeft != "00:00:00" ? true : false} />
 		</section>
 	);
 };

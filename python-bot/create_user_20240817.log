@@ -4,3 +4,29 @@
 2024-08-17 22:49:58,854 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
 2024-08-17 22:49:59,529 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
 2024-08-17 22:49:59,697 - aiogram.event - INFO - Update id=168164799 is handled. Duration 1233 ms by bot id=7247722923
+2024-08-17 23:12:46,810 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:12:46,811 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:12:47,496 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:12:47,613 - aiogram.event - INFO - Update id=168164800 is handled. Duration 1171 ms by bot id=7247722923
+2024-08-17 23:12:59,199 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:12:59,201 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:12:59,901 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:12:59,966 - aiogram.event - INFO - Update id=168164801 is handled. Duration 1110 ms by bot id=7247722923
+2024-08-17 23:14:10,156 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:14:10,158 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:14:10,833 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:14:11,049 - aiogram.event - INFO - Update id=168164802 is handled. Duration 1281 ms by bot id=7247722923
+2024-08-17 23:17:12,661 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:17:12,662 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:17:13,419 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:17:13,559 - aiogram.event - INFO - Update id=168164803 is handled. Duration 1296 ms by bot id=7247722923
+2024-08-17 23:19:31,110 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:19:31,111 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:19:31,805 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:19:31,935 - aiogram.event - INFO - Update id=168164804 is handled. Duration 1171 ms by bot id=7247722923
+2024-08-17 23:19:35,843 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-17 23:19:35,844 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-17 23:19:36,581 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-17 23:19:36,645 - aiogram.event - INFO - Update id=168164805 is handled. Duration 1171 ms by bot id=7247722923
+2024-08-17 23:20:54,988 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-17 23:20:55,247 - aiogram.dispatcher - INFO - Polling stopped for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'

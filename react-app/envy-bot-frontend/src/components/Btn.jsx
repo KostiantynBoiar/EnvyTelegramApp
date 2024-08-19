@@ -14,11 +14,11 @@ const Btn = ({ afterClickText, text, onClick, disabled }) => {
 
   const handleClick = (event) => {
     if (disabled) {
-      
       return;
     }
 
     if (!isDisabled) {
+      
       setIsDisabled(true);
       setButtonText(afterClickText);
       onClick(event);
