@@ -61,8 +61,6 @@ export const Home = () => {
                 setUser(updatedUser);
                 setCoins(updatedUser.count_of_coins);
                 setText("Process farm...");
-                //await new Promise(resolve => setTimeout(resolve, 1000));
-                setText(timeLeft)
                 console.log('Reward claimed successfully:', updatedUser);
 
                 try {

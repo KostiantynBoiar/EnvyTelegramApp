@@ -1,2 +1,28 @@
 2024-08-19 18:32:21,552 - aiogram.dispatcher - INFO - Start polling
 2024-08-19 18:32:21,674 - aiogram.dispatcher - INFO - Run polling for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-19 18:33:38,271 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-19 18:33:38,272 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-19 18:33:39,020 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-19 18:33:39,024 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - Request timeout error
+2024-08-19 18:33:39,024 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7247722923)
+2024-08-19 18:33:39,208 - aiogram.event - INFO - Update id=168164807 is handled. Duration 73563 ms by bot id=7247722923
+2024-08-19 18:33:40,048 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7247722923)
+2024-08-19 18:33:40,432 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-19 18:33:40,433 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-19 18:33:41,183 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-19 18:33:41,382 - aiogram.event - INFO - Update id=168164808 is handled. Duration 1344 ms by bot id=7247722923
+2024-08-19 18:55:05,815 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-19 18:55:05,816 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-19 18:55:06,590 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-19 18:55:06,593 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+2024-08-19 18:55:06,593 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7247722923)
+2024-08-19 18:55:06,756 - aiogram.event - INFO - Update id=168164809 is handled. Duration 60625 ms by bot id=7247722923
+2024-08-19 18:55:17,628 - aiogram.dispatcher - INFO - Connection established (tryings = 1, bot id = 7247722923)
+2024-08-19 18:55:40,927 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-19 18:55:40,928 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '6648768620', 'telegram_username': 'S7dsDi', 'reffered_by': None}
+2024-08-19 18:55:41,750 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-19 18:55:41,889 - aiogram.event - INFO - Update id=168164810 is handled. Duration 1375 ms by bot id=7247722923
+2024-08-19 21:37:15,618 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-19 21:37:15,620 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-19 21:37:16,315 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-19 21:37:16,532 - aiogram.event - INFO - Update id=168164811 is handled. Duration 53281 ms by bot id=7247722923
