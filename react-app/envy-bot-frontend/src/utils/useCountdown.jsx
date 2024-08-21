@@ -6,15 +6,25 @@ const useCountdown = (lastClaimTime) => {
     useEffect(() => {
         if (!lastClaimTime) return;
 
+        const getOffsetFromUTC = () => {
+            const offset = new Date().getTimezoneOffset();
+            const sign = offset > 0 ? '-' : '+';
+            const absOffset = Math.abs(offset);
+            const hours = Math.floor(absOffset / 60) - 1;
+            const minutes = String(absOffset % 60).padStart(2, '0');
+            return hours;
+        };
+
         const calculateTimeLeft = () => {
-            const claimInterval = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
-            const lastClaimTimeInUTC1 = new Date(new Date(lastClaimTime).toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
+            const claimInterval = 24 * 60 * 60 * 1000; 
+            console.log(getOffsetFromUTC())
+            const lastClaimTimeInUTC1 = new Date(lastClaimTime).getTime()
             const nextClaimTimeInUTC1 = lastClaimTimeInUTC1 + claimInterval;
-            const currentTimeInUTC1 = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime();
+            const currentTimeInUTC1 = new Date().getTime();
             const timeLeft = nextClaimTimeInUTC1 - currentTimeInUTC1;
 
             if (timeLeft > 0) {
-                const hours = String(Math.floor((timeLeft / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+                const hours = String(Math.floor((timeLeft / (1000 * 60 * 60)) % 24) + 1 + getOffsetFromUTC()).padStart(2, '0');
                 const minutes = String(Math.floor((timeLeft / (1000 * 60)) % 60)).padStart(2, '0');
                 const seconds = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
                 console.log(`${hours}:${minutes}:${seconds}`)
