@@ -1,0 +1,17 @@
+2024-08-24 16:42:33,500 - aiogram.dispatcher - INFO - Start polling
+2024-08-24 16:42:33,871 - aiogram.dispatcher - INFO - Run polling for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
+2024-08-24 16:42:34,382 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-24 16:42:34,383 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '1041016840', 'telegram_username': 'T_Valeriya_A', 'reffered_by': 15}
+2024-08-24 16:42:35,121 - utils.api_requests - INFO - User created successfully. Status code: 200
+2024-08-24 16:42:35,302 - aiogram.event - INFO - Update id=168164879 is handled. Duration 1342 ms by bot id=7247722923
+2024-08-24 16:42:50,854 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-24 16:42:50,856 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-24 16:42:51,511 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-24 16:42:51,712 - aiogram.event - INFO - Update id=168164880 is handled. Duration 1202 ms by bot id=7247722923
+2024-08-24 16:43:19,467 - utils.api_requests - ERROR - HTTP error occurred: 404 Client Error: Not Found for url: https://envytelegramapp.onrender.com/api/v1/users/referral/None
+2024-08-24 16:43:19,468 - utils.api_requests - INFO - Creating user with data: {'telegram_id': '506652203', 'telegram_username': 'koreechdhs', 'reffered_by': None}
+2024-08-24 16:43:20,133 - utils.api_requests - ERROR - HTTP error occurred: 400 Client Error: Bad Request for url: https://envytelegramapp.onrender.com/api/v1/users/
+2024-08-24 16:43:20,318 - aiogram.event - INFO - Update id=168164881 is handled. Duration 1186 ms by bot id=7247722923
+2024-08-24 16:44:19,076 - aiogram.event - INFO - Update id=168164882 is not handled. Duration 0 ms by bot id=7247722923
+2024-08-24 17:15:39,697 - aiogram.dispatcher - INFO - Polling stopped
+2024-08-24 17:15:39,951 - aiogram.dispatcher - INFO - Polling stopped for bot @EnvyApp_test_bot id=7247722923 - 'EnvyApp_test'
