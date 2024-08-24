@@ -10,13 +10,14 @@ const Tasks = () => {
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
   const [text, setText] = useState("Press on the task")
+  const [isTaskProcessing, setIsTaskProcessing] = useState(false);
 
   let tg = window.Telegram.WebApp;
   useEffect(() => {
     const fetchUserIdAndTasks = async () => {
       try {
-        const id = await getUserId(tg.initDataUnsafe.user.id);
-        //const id = await getUserId("506652203");
+        //const id = await getUserId(tg.initDataUnsafe.user.id);
+        const id = await getUserId("506652203");
         setUserId(id);
 
         if (id) {
@@ -41,8 +42,15 @@ const Tasks = () => {
     fetchUserIdAndTasks();
   }, []);
 
-  const handleTaskClick = async (task, event) => {
+
+const handleTaskClick = async (task, event) => {
     event.preventDefault(); 
+    
+    
+    if (isTaskProcessing) return;
+
+    setIsTaskProcessing(true);
+    
     try {
       await fetch(`https://envytelegramapp.onrender.com/api/v1/users/reward/${userId}`, {
         method: "PUT",
@@ -56,17 +64,21 @@ const Tasks = () => {
         method: "DELETE"
       });
   
-      // Update the tasks list in the state
+      
       setTasks((prevTasks) => prevTasks.filter(t => t.id !== task.id));
   
-      // Redirect the user to the description link
-      console.log(task)
-      console.log(task.description)
+      
+      console.log(task);
+      console.log(task.description);
       window.location.href = task.description;
+      
     } catch (error) {
       console.error('Error processing the task:', error);
+    } finally {
+      setIsTaskProcessing(false); 
     }
   };
+
   
 
   if (loading) {
