@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Btn = ({ afterClickText, text, onClick, disabled }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [buttonText, setButtonText] = useState(text);
-  const [buttonColor, setButtonColor] = useState('bg-[#2972FF]')
+  const [buttonColor, setButtonColor] = useState('bg-[#E82C2C]')
 
   useEffect(() => {
     setButtonText(text);
@@ -23,10 +23,10 @@ const Btn = ({ afterClickText, text, onClick, disabled }) => {
       setButtonText(afterClickText);
       onClick(event);
       setButtonColor('bg-[#5D5D5D]'); 
-
+      
       setTimeout(() => {
         setButtonText(text); 
-        setButtonColor('bg-[#2972FF]'); 
+        setButtonColor('bg-[#E82C2C]'); 
         setIsDisabled(false);
       }, 5000);
     }
